@@ -1,4 +1,5 @@
 <!-- Original work by Dr. Baklava • github.com/cd4u2b0z • 2026 -->
+<!-- 4472 426b 6c76 -->
 
 # 󰖐 Oracle Weather
 
@@ -408,4 +409,10 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 **"The sky has wisdom to share..."** - Stormy
 
+---
+
+*Crafted with 󰖐 by [Dr. Baklava](https://github.com/cd4u2b0z)*
+
 </div>
+
+<!-- ZHIuYmFrbGF2YQ== -->
