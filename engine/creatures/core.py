@@ -522,7 +522,7 @@ class CreatureManager:
                 py = self.creature_y + i
                 if self.ax + 1 <= px < self.ax + self.aw - len(line) and 3 <= py < self.height - 3:
                     screen.print_at(line, px, py, colour=colour)
-            except:
+            except Exception:
                 pass
     
     @property

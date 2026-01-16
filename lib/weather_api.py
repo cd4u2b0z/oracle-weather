@@ -432,7 +432,7 @@ def geocode_location(query: str) -> Optional[dict]:
                     'state': result.get('state', ''),
                     'country': result['country'],
                 }
-        except:
+        except Exception:
             pass
         return None
     

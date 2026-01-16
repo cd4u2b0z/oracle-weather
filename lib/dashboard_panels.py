@@ -389,7 +389,7 @@ class AstronomicalPanel:
                 self.screen.print_at(f"  ⏱️  Day: {hours}h {minutes}m", x, y, 
                                     colour=Screen.COLOUR_WHITE)
                 y += 1
-            except:
+            except Exception:
                 pass
         
         y += 1

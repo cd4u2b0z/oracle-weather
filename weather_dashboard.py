@@ -566,7 +566,7 @@ class StormyPersonality:
         if self.data_path.exists():
             try:
                 return json.loads(self.data_path.read_text())
-            except:
+            except Exception:
                 pass
         return {
             "achievements": [],
@@ -580,7 +580,7 @@ class StormyPersonality:
         """Save persistent data."""
         try:
             self.data_path.write_text(json.dumps(self.data, indent=2))
-        except:
+        except Exception:
             pass
     
     def get_greeting(self) -> str:
@@ -1828,7 +1828,7 @@ class WeatherDashboard:
                         if ax + 1 <= tx < ax + aw - 1 and 2 <= ty < self.height - 2:
                             trail_colour = Screen.COLOUR_BLUE if i == 0 else Screen.COLOUR_BLACK
                             self.screen.print_at("·", tx, ty, colour=trail_colour)
-            except:
+            except Exception:
                 pass
         
         # Regular particles (for drifting effects)
@@ -1838,7 +1838,7 @@ class WeatherDashboard:
                 if ax + 1 <= px < ax + aw - 1 and 2 <= py < self.height - 2:
                     colour = Theme.SUN if self.lightning_active and random.random() > 0.3 else p.colour
                     self.screen.print_at(p.char, px, py, colour=colour)
-            except:
+            except Exception:
                 pass
         
         # ═══════════════════════════════════════════════════════════════════
@@ -2169,7 +2169,7 @@ def dashboard_main(screen: Screen):
             try:
                 from weather_live import weather_live
                 weather_live(screen)
-            except:
+            except Exception:
                 pass
             dashboard = WeatherDashboard(screen, weather)
         

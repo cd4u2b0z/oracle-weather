@@ -263,7 +263,7 @@ class RenderQueue:
                     colour=cmd.colour, attr=cmd.attr
                 )
                 count += 1
-            except:
+            except Exception:
                 pass
         return count
 

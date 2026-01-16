@@ -1,5 +1,5 @@
 """
-Weather API Configuration for asciimatics-weather-toys
+Weather API Configuration for Oracle Weather
 Uses the same APIs as your Waybar weather module.
 """
 
@@ -17,7 +17,7 @@ TIMEZONE = "America/New_York"
 LOCATION_NAME = "Summerville, SC"
 
 # Cache settings
-CACHE_FILE = "/tmp/asciimatics_weather_cache.json"
+CACHE_FILE = "/tmp/oracle_weather_cache.json"
 CACHE_MAX_AGE = 300  # 5 minutes
 
 # Animation settings
