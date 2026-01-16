@@ -349,26 +349,12 @@ curl "https://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_KEY"
 
 ---
 
+
 ## 󰋚 Changelog
 
-### v2.0.0 (January 2026)
-- 󰐕 **New Modules**
-  - `lib/weather_extended.py` - Forecast, alerts, astronomical data framework
-  - `lib/achievements.py` - Achievement system framework
-  - `lib/dashboard_panels.py` - UI panel components
-  - `engine/effects/special_effects.py` - Aurora, rainbow, heat shimmer effects
-  
-- 󰏗 **Engine Improvements**
-  - Special effects manager with condition-based activation
-  - Achievement manager with weather-based unlocks
-  - Extended weather data structures
+See [CHANGELOG.md](CHANGELOG.md) for full version history.
 
-### v1.0.0 (Initial Release)
-- Live weather integration with OpenWeatherMap
-- Physics-based particle system
-- Atmospheric modeling
-- Personality engine (Stormy)
-- Easter egg creatures
+**Latest: v2.1.1** - Performance improvements and bug fixes
 
 ---
 
