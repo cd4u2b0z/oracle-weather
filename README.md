@@ -1,6 +1,6 @@
 <!-- Original work by Dr. Baklava • github.com/cd4u2b0z • 2026 -->
 
-# 🌩️ Oracle Weather
+# 󰖐 Oracle Weather
 
 **Stormy - Weather Oracle of the Terminal**
 
@@ -12,42 +12,45 @@ A professional-grade ASCII weather dashboard and animation system built with Pyt
 
 ---
 
-## 🌟 Features
+## 󰓎 Features
 
 ### Core Features
 | Feature | Description |
 |---------|-------------|
 | **Live Weather** | Real-time weather data from OpenWeatherMap API |
 | **Weather Dashboard** | Full terminal dashboard with sidebar stats + animation |
-| **7-Day Forecast** | Extended forecast panel with daily conditions |
-| **Weather Alerts** | NWS severe weather alerts integration |
-| **Astronomical Data** | Sunrise/sunset, moon phases, day length |
-| **UV Index & AQI** | Environmental health monitoring |
-| **30+ Achievements** | Unlock achievements for weather experiences |
-| **Special Effects** | Aurora borealis, rainbows, heat shimmer, and more |
+| **Multiple Weather Types** | Rain, snow, thunderstorms, fog, clouds, clear sky |
+| **Easter Egg Creatures** | Rare visitors appear based on weather + time |
+| **Personality Engine** | AI companion "Stormy" with mood states and dialogue |
 
 ### Weather Types
-- ☔ Rain (light, moderate, heavy, drizzle)
-- ❄️ Snow (light, moderate, heavy, blizzard)
-- ⛈️ Thunderstorms (with realistic lightning)
-- 🌫️ Fog and mist
-- ☁️ Clouds (various densities)
-- ☀️ Clear sky (day and night variants)
-- 🌈 Special effects (aurora, rainbow, heat shimmer, hail)
+- 󰖗 Rain (light, moderate, heavy, drizzle)
+- 󰖘 Snow (light, moderate, heavy, blizzard)
+- 󰖓 Thunderstorms (with realistic lightning)
+- 󰖑 Fog and mist
+- 󰖐 Clouds (various densities)
+- 󰖙 Clear sky (day and night variants)
 
-### Advanced Engine (v2.0)
+### Engine Modules
 | Module | Description |
 |--------|-------------|
-| 🔬 **Physics Engine** | Real Newtonian mechanics with gravity, drag, and wind forces |
-| 🌡️ **Atmospheric Model** | Barometric pressure formula, Pasquill-Gifford stability classification |
-| 🌀 **Procedural Noise** | Perlin, Simplex, Fractal noise + Domain Warping |
-| 🎭 **Personality Engine** | AI mood state machine with memory and weather-aware dialogue |
-| 📊 **Render Stats** | FPS tracking, layer timing, adaptive quality scaling |
-| ✨ **Special Effects** | Aurora, rainbow, heat shimmer, frost patterns, sun rays |
+| 󰂓 **Physics Engine** | Newtonian mechanics with gravity, drag, and wind forces |
+| 󱗆 **Atmospheric Model** | Barometric pressure, stability classification |
+| 󰘨 **Procedural Noise** | Perlin, Simplex, Fractal noise + Domain Warping |
+| 󰔊 **Personality Engine** | Mood state machine with weather-aware dialogue |
+| 󱕍 **Render Stats** | FPS tracking, adaptive quality scaling |
+
+### Planned Features (v2.1)
+> These modules exist in `lib/` but are not yet fully integrated into the dashboard UI:
+- 7-day forecast panel
+- NWS weather alerts
+- Astronomical data (sunrise/sunset, moon phases)
+- UV index and air quality monitoring
+- Achievement system
 
 ---
 
-## 📦 Requirements
+## 󰏖 Requirements
 
 ### System Requirements
 - **OS**: Linux or macOS
@@ -64,7 +67,7 @@ pyyaml>=6.0
 
 ---
 
-## 🚀 Quick Start
+## 󰑣 Quick Start
 
 ### One-Line Install (Linux)
 ```bash
@@ -84,7 +87,7 @@ python weather_dashboard.py
 
 ---
 
-## 📥 Installation
+## 󰏗 Installation
 
 ### Step 1: Clone Repository
 ```bash
@@ -127,7 +130,7 @@ python weather_dashboard.py
 
 ---
 
-## 🎮 Usage
+## 󰌌 Usage
 
 ### Commands
 ```bash
@@ -153,9 +156,7 @@ python main.py
 | `Q` | Quit |
 | `R` | Refresh weather data |
 | `L` or `S` | Search any location worldwide |
-| `F` | Toggle forecast panel |
 | `A` | View achievements |
-| `U` | Toggle metric/imperial units |
 | `?` | Show help overlay |
 | `Space` | Toggle Stormy's quips |
 
@@ -172,18 +173,18 @@ Examples:
 
 ---
 
-## 🏗️ Project Structure
+## 󰙅 Project Structure
 
 ```
 oracle-weather/
 ├── config.py              # API keys and settings
 ├── config.yaml            # User configuration (create from example)
-├── weather_dashboard.py   # 📊 Main dashboard with Stormy AI
-├── weather_live.py        # 🌦️ Fullscreen weather animation
-├── weather_live_pro.py    # ⚡ Enhanced pro version
+├── weather_dashboard.py   # Main dashboard with Stormy AI
+├── weather_live.py        # Fullscreen weather animation
+├── weather_live_pro.py    # Enhanced pro version
 ├── main.py                # Demo title screen
 │
-├── engine/                # ⚡ Professional-grade modular engine
+├── engine/                # Professional-grade modular engine
 │   ├── physics/
 │   │   ├── noise.py       # Perlin, Simplex, Fractal, DomainWarp
 │   │   ├── particles.py   # Vector2, ParticleSystem, Forces
@@ -199,10 +200,10 @@ oracle-weather/
 │
 ├── lib/                   # Shared utilities
 │   ├── weather_api.py     # OpenWeatherMap + OpenMeteo client
-│   ├── weather_extended.py # Forecasts, alerts, astronomical data
-│   ├── achievements.py    # 30+ achievement system
+│   ├── weather_extended.py # Forecasts, alerts, astronomical (WIP)
+│   ├── achievements.py    # Achievement system (WIP)
 │   ├── interactive.py     # Input handling, notifications
-│   ├── dashboard_panels.py # UI panel components
+│   ├── dashboard_panels.py # UI panel components (WIP)
 │   └── particles.py       # Legacy particle physics
 │
 └── tests/
@@ -212,7 +213,7 @@ oracle-weather/
 
 ---
 
-## ⚙️ Configuration
+## 󰒓 Configuration
 
 ### config.yaml (Recommended)
 ```yaml
@@ -230,8 +231,6 @@ location:
 display:
   units: imperial  # or metric
   theme: default
-  show_forecast: true
-  show_alerts: true
 ```
 
 ### Environment Variables (Alternative)
@@ -242,7 +241,7 @@ export WEATHER_CITY_ID="4597040"
 
 ---
 
-## 🔧 Engine Architecture
+## 󰈈 Engine Architecture
 
 ### Physics Engine (`engine/physics/`)
 
@@ -281,7 +280,7 @@ state = AtmosphericState(
 )
 model = AtmosphericModel(state)
 
-# Barometric formula: P(h) = P₀ × exp(-Mgh/RT)
+# Barometric formula: P(h) = P0 x exp(-Mgh/RT)
 pressure_at_1km = model.pressure_at_altitude(1000)
 
 # Pasquill-Gifford stability classification
@@ -305,7 +304,7 @@ comment = engine.get_weather_comment("thunderstorm")
 
 ---
 
-## 🧪 Testing
+## 󰙨 Testing
 
 ```bash
 # Run all tests
@@ -323,7 +322,7 @@ python -m pytest tests/ --cov=engine --cov-report=term-missing
 
 ---
 
-## 🐛 Troubleshooting
+## 󰋗 Troubleshooting
 
 ### Common Issues
 
@@ -349,29 +348,22 @@ curl "https://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_KEY"
 
 ---
 
-## 📜 Changelog
+## 󰋚 Changelog
 
 ### v2.0.0 (January 2026)
-- ✨ **New Features**
-  - 7-day forecast panel with toggle (F key)
-  - NWS severe weather alerts integration
-  - Astronomical data (sunrise/sunset, moon phases)
-  - UV index and air quality monitoring
-  - 30+ achievements system with persistent storage
-  - Special effects (aurora, rainbow, heat shimmer, hail, frost)
-  - Interactive help overlay (? key)
-  - Notification system for achievements
-  - Metric/imperial unit toggle (U key)
-  - Enhanced keyboard controls
+- 󰐕 **New Modules**
+  - `lib/weather_extended.py` - Forecast, alerts, astronomical data framework
+  - `lib/achievements.py` - Achievement system framework
+  - `lib/dashboard_panels.py` - UI panel components
+  - `engine/effects/special_effects.py` - Aurora, rainbow, heat shimmer effects
   
-- 🔧 **Engine Improvements**
+- 󰏗 **Engine Improvements**
   - Special effects manager with condition-based activation
   - Achievement manager with weather-based unlocks
-  - Extended weather data fetching
-  - Dashboard panels for new data types
+  - Extended weather data structures
 
 ### v1.0.0 (Initial Release)
-- Live weather integration
+- Live weather integration with OpenWeatherMap
 - Physics-based particle system
 - Atmospheric modeling
 - Personality engine (Stormy)
@@ -379,7 +371,7 @@ curl "https://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_KEY"
 
 ---
 
-## 🤝 Integration
+## 󱘖 Integration
 
 ### Waybar (Hyprland/Sway)
 Add to your Waybar weather module:
@@ -398,18 +390,17 @@ alias weather_live='cd ~/oracle-weather && source .venv/bin/activate && python w
 
 ---
 
-## 📄 License
+## 󰈙 License
 
 MIT License - See [LICENSE](LICENSE) for details.
 
 ---
 
-## 🙏 Credits
+## 󱗗 Credits
 
 - **asciimatics** - Terminal animation framework
 - **OpenWeatherMap** - Weather data API
 - **OpenMeteo** - Backup weather API
-- **NWS** - Weather alerts API
 
 ---
 
