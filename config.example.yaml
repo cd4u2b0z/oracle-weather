@@ -1,0 +1,198 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# STORMY WEATHER DASHBOARD CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# "Configuration files are like weather patterns - complex, mysterious, 
+#  and occasionally cause thunderstorms in production." - Stormy
+#
+# Copy this file to ~/.stormy/config.yaml or config.yaml in the app directory
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ───────────────────────────────────────────────────────────────────────────────
+# API Configuration
+# ───────────────────────────────────────────────────────────────────────────────
+api:
+  # OpenWeatherMap API key (sign up at https://openweathermap.org/api)
+  openweathermap_key: "YOUR_API_KEY_HERE"
+  
+  # Default weather provider: "openweathermap" or "openmeteo"
+  # Note: OpenMeteo is free and doesn't require an API key!
+  default_provider: "openmeteo"
+  
+  # Cache duration in seconds (default: 5 minutes)
+  cache_duration: 300
+  
+  # Request timeout in seconds
+  timeout: 10
+
+# ───────────────────────────────────────────────────────────────────────────────
+# Locations
+# ───────────────────────────────────────────────────────────────────────────────
+locations:
+  # Default location (required)
+  default: "summerville"
+  
+  # Saved locations
+  saved:
+    summerville:
+      name: "Summerville, SC"
+      latitude: 33.0185
+      longitude: -80.1756
+      timezone: "America/New_York"
+    
+    # Add more locations:
+    # new_york:
+    #   name: "New York, NY"
+    #   latitude: 40.7128
+    #   longitude: -74.0060
+    #   timezone: "America/New_York"
+    #
+    # london:
+    #   name: "London, UK"
+    #   latitude: 51.5074
+    #   longitude: -0.1278
+    #   timezone: "Europe/London"
+
+# ───────────────────────────────────────────────────────────────────────────────
+# Units
+# ───────────────────────────────────────────────────────────────────────────────
+units:
+  # Temperature: "fahrenheit" or "celsius"
+  temperature: "fahrenheit"
+  
+  # Wind speed: "mph", "kmh", "ms", or "knots"
+  speed: "mph"
+  
+  # Pressure: "inhg", "hpa", or "mbar"
+  pressure: "inhg"
+
+# ───────────────────────────────────────────────────────────────────────────────
+# Display Settings
+# ───────────────────────────────────────────────────────────────────────────────
+display:
+  # Color theme: default, nord, dracula, solarized_dark, solarized_light,
+  #              gruvbox, monokai, cyberpunk, retro
+  theme: "default"
+  
+  # Show particle animations (rain, snow, etc.)
+  particles: true
+  
+  # Number of particles (affects performance)
+  particle_count: 200
+  
+  # Show forecast panel
+  show_forecast: true
+  
+  # Show hourly forecast
+  show_hourly: true
+  
+  # Show weather alerts
+  show_alerts: true
+  
+  # Show sun/moon information
+  show_astronomical: true
+  
+  # Show UV/AQI panel
+  show_environmental: true
+  
+  # Compact mode (less spacing)
+  compact_mode: false
+  
+  # Frame rate limit (higher = smoother but more CPU)
+  fps: 20
+
+# ───────────────────────────────────────────────────────────────────────────────
+# Personality (Stormy's Settings)
+# ───────────────────────────────────────────────────────────────────────────────
+personality:
+  # Enable Stormy's witty commentary
+  enabled: true
+  
+  # Verbosity: "quiet", "normal", or "chatty"
+  verbosity: "normal"
+  
+  # Mood influences (how much weather affects mood)
+  mood_influence: 1.0
+  
+  # Enable snarky comments
+  snarky: true
+  
+  # Enable achievements
+  achievements: true
+  
+  # Track creature sightings (UFOs, dragons, etc.)
+  creatures: true
+
+# ───────────────────────────────────────────────────────────────────────────────
+# Special Effects
+# ───────────────────────────────────────────────────────────────────────────────
+effects:
+  # Enable special weather effects
+  enabled: true
+  
+  # Individual effect toggles
+  aurora: true
+  heat_shimmer: true
+  rainbow: true
+  frost_patterns: true
+  sun_rays: true
+  heat_lightning: true
+
+# ───────────────────────────────────────────────────────────────────────────────
+# Data & Export
+# ───────────────────────────────────────────────────────────────────────────────
+data:
+  # Enable weather history database
+  history_enabled: true
+  
+  # Database location (default: ~/.stormy/weather_history.db)
+  database_path: "~/.stormy/weather_history.db"
+  
+  # Export directory for screenshots and data
+  export_path: "~/.stormy/exports"
+  
+  # Auto-record weather observations
+  auto_record: true
+  
+  # Record interval in seconds (default: 15 minutes)
+  record_interval: 900
+
+# ───────────────────────────────────────────────────────────────────────────────
+# Keyboard Shortcuts
+# ───────────────────────────────────────────────────────────────────────────────
+keybindings:
+  quit: "q"
+  refresh: "r"
+  help: "?"
+  toggle_units: "u"
+  toggle_forecast: "f"
+  toggle_compact: "c"
+  toggle_particles: "a"
+  cycle_theme: "t"
+  toggle_moon: "m"
+  toggle_alerts: "w"
+  search_location: "l"
+  next_location: "n"
+  prev_location: "p"
+  screenshot: "s"
+  export_data: "e"
+
+# ───────────────────────────────────────────────────────────────────────────────
+# Widget Mode (for i3blocks, polybar, waybar, etc.)
+# ───────────────────────────────────────────────────────────────────────────────
+widget:
+  # Widget output format: "text", "json", or "pango"
+  format: "text"
+  
+  # What to show in widget mode
+  show_temperature: true
+  show_condition: true
+  show_humidity: false
+  show_wind: false
+  
+  # Emoji icons in output
+  use_emoji: true
+  
+  # Alert threshold temperature (shows warning color)
+  alert_temp_high: 95
+  alert_temp_low: 32
