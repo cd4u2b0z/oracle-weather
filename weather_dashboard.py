@@ -1097,7 +1097,7 @@ class WeatherDashboard:
         self.alerts: List[WeatherAlert] = []
         self.astro_data: Optional[AstronomicalData] = None
         self.env_data: Optional[EnvironmentalData] = None
-        self._fetch_extended_data()
+        self._extended_data_fetched = False  # Lazy load on first draw
         
         # Special effects manager
         if SPECIAL_EFFECTS_AVAILABLE:
@@ -1389,6 +1389,11 @@ class WeatherDashboard:
         """Update animation state with advanced physics."""
         self.frame += 1
         
+        # Lazy fetch extended data on first update
+        if not self._extended_data_fetched:
+            self._extended_data_fetched = True
+            import threading
+            threading.Thread(target=self._fetch_extended_data, daemon=True).start()
         # ═══════════════════════════════════════════════════════════════════
         # 🧠 UPDATE ADVANCED PHYSICS SYSTEMS
         # ═══════════════════════════════════════════════════════════════════
@@ -2113,7 +2118,7 @@ def dashboard_main(screen: Screen):
         screen.print_at(" " * 40, (screen.width - 40) // 2, ly, colour=Theme.FROST)
         screen.print_at(msg, (screen.width - len(msg)) // 2, ly, colour=Theme.FROST)
         screen.refresh()
-        time.sleep(0.3)
+        time.sleep(0.1)
     
     weather = get_weather()
     
