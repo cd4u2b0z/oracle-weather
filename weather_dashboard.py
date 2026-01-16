@@ -1857,7 +1857,8 @@ class WeatherDashboard:
             self._draw_lightning()
         
         # Easter egg creatures (rare visitors!)
-        self.easter_eggs.draw(self.screen, self.lightning_active)
+        colour_map = {"FROST": Theme.FROST, "SNOW": Theme.SNOW, "SUN": Theme.SUN, "DANGER": Theme.DANGER, "NATURE": Theme.NATURE, "MAGIC": Theme.MAGIC, "MUTED": Theme.MUTED}
+        self.easter_eggs.draw(self.screen, colour_map, self.lightning_active)
         
         # ═══════════════════════════════════════════════════════════════════
         # 🌊 GROUND ACCUMULATION (Puddles / Snow drifts)
