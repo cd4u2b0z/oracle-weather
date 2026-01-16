@@ -8,7 +8,7 @@ Modules:
 - physics: Procedural noise, particle physics, atmospheric simulation
 - rendering: Performance-aware frame rendering with layer management
 - personality: AI personality system with mood states and memory
-- weather: Weather data fetching and processing
+- effects: Special weather effects (aurora, rainbows, etc.)
 - creatures: Easter egg creature system
 
 Usage:

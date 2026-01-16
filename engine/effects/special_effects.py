@@ -138,7 +138,7 @@ class AuroraBorealis:
                                     char, x + x_offset, draw_y,
                                     colour=wave.color
                                 )
-                            except:
+                            except Exception:
                                 pass
 
 
@@ -199,7 +199,7 @@ class HeatShimmer:
                     color = Screen.COLOUR_YELLOW if random.random() > 0.5 else Screen.COLOUR_WHITE
                     try:
                         screen.print_at(char, x + x_offset, y, colour=color)
-                    except:
+                    except Exception:
                         pass
 
 
@@ -266,7 +266,7 @@ class Rainbow:
                         char = "█" if random.random() > 0.3 else "▓"
                         try:
                             screen.print_at(char, x, y, colour=color)
-                        except:
+                        except Exception:
                             pass
 
 
@@ -352,7 +352,7 @@ class HailEffect:
                 char = random.choice(chars)
                 try:
                     screen.print_at(char, x, y, colour=Screen.COLOUR_WHITE)
-                except:
+                except Exception:
                     pass
 
 
@@ -431,7 +431,7 @@ class SandstormEffect:
                 if random.random() < 0.2:
                     try:
                         screen.print_at("░", x, y, colour=Screen.COLOUR_YELLOW)
-                    except:
+                    except Exception:
                         pass
         
         # Draw particles
@@ -444,7 +444,7 @@ class SandstormEffect:
                     color = Screen.COLOUR_YELLOW if random.random() > 0.3 else Screen.COLOUR_WHITE
                     try:
                         screen.print_at(p.char, x, y, colour=color)
-                    except:
+                    except Exception:
                         pass
 
 
@@ -531,7 +531,7 @@ class FrostPatterns:
                 color = Screen.COLOUR_WHITE if random.random() > 0.1 else Screen.COLOUR_CYAN
                 try:
                     screen.print_at(char, draw_x, draw_y, colour=color)
-                except:
+                except Exception:
                     pass
 
 
@@ -610,7 +610,7 @@ class SunRays:
                                     char, draw_x, y,
                                     colour=Screen.COLOUR_YELLOW
                                 )
-                            except:
+                            except Exception:
                                 pass
 
 
@@ -675,7 +675,7 @@ class HeatLightning:
                         color = Screen.COLOUR_WHITE if random.random() > 0.3 else Screen.COLOUR_YELLOW
                         try:
                             screen.print_at(char, draw_x, draw_y, colour=color)
-                        except:
+                        except Exception:
                             pass
 
 
