@@ -5,6 +5,17 @@ All notable changes to Oracle Weather will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.1] - 2026-01-16
+
+### Fixed
+- **Startup Performance** - Extended data (forecast, alerts, astro) now fetched in background thread
+- **Loading Animation** - Reduced delay from 1.2s to 0.4s
+- **Broken venv** - Recreated virtual environment with correct paths after project rename
+
+### Changed
+- Extended weather data loads lazily after first frame renders
+- Dashboard now usable immediately while forecast data loads in background
+
 ## [2.1.0] - 2026-01-16
 
 ### Added
