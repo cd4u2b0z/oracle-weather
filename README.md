@@ -9,7 +9,7 @@ A professional-grade ASCII weather dashboard and animation system built with Pyt
 
 ![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat&logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat)
-![Version](https://img.shields.io/badge/Version-2.0.0-blue?style=flat)
+![Version](https://img.shields.io/badge/Version-2.1.1-blue?style=flat)
 
 ---
 
