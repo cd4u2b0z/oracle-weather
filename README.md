@@ -178,33 +178,41 @@ Examples:
 
 ```
 oracle-weather/
-├── config.py              # API keys and settings
-├── config.yaml            # User configuration (create from example)
-├── weather_dashboard.py   # Main dashboard with Stormy AI
-├── weather_live.py        # Fullscreen weather animation
-├── weather_live_pro.py    # Enhanced pro version
+├── weather_dashboard.py   # Main dashboard with Stormy AI personality
+├── weather_live_pro.py    # Pro version with enhanced effects
 ├── main.py                # Demo title screen
+├── config.py              # API key loader
+├── config_manager.py      # YAML configuration management
+├── config.example.yaml    # Example config (copy to config.yaml)
+├── requirements.txt       # Python dependencies
 │
 ├── engine/                # Professional-grade modular engine
+│   ├── __init__.py        # Engine exports
 │   ├── physics/
+│   │   ├── __init__.py
 │   │   ├── noise.py       # Perlin, Simplex, Fractal, DomainWarp
 │   │   ├── particles.py   # Vector2, ParticleSystem, Forces
 │   │   └── atmosphere.py  # AtmosphericModel, stability, wind chill
 │   ├── rendering/
+│   │   ├── __init__.py
 │   │   └── core.py        # RenderStats, FrameBudget, RenderQueue
 │   ├── personality/
+│   │   ├── __init__.py
 │   │   └── core.py        # PersonalityEngine, MoodStateMachine
 │   ├── effects/
-│   │   └── special_effects.py  # Aurora, rainbow, heat shimmer
-│   ├── creatures/         # Easter egg creature system
-│   └── weather/           # Weather processing
+│   │   ├── __init__.py
+│   │   └── special_effects.py  # Aurora, rainbow, fog, heat shimmer
+│   └── creatures/
+│       ├── __init__.py
+│       └── core.py        # CreatureManager, 11 weather creatures
 │
 ├── lib/                   # Shared utilities
+│   ├── __init__.py
 │   ├── weather_api.py     # OpenWeatherMap + OpenMeteo client
-│   ├── weather_extended.py # Forecasts, alerts, astronomical (WIP)
-│   ├── achievements.py    # Achievement system (WIP)
+│   ├── weather_extended.py # Forecasts, alerts, astronomical data
+│   ├── achievements.py    # Achievement system
 │   ├── interactive.py     # Input handling, notifications
-│   ├── dashboard_panels.py # UI panel components (WIP)
+│   ├── dashboard_panels.py # UI panel components
 │   └── particles.py       # Legacy particle physics
 │
 └── tests/
@@ -213,7 +221,6 @@ oracle-weather/
 ```
 
 ---
-
 ## 󰒓 Configuration
 
 ### config.yaml (Recommended)
