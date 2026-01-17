@@ -66,6 +66,20 @@ pyyaml>=6.0
 
 ## 󰑣 Quick Start
 
+### 󰈈 Try It Now (No API Key Needed!)
+```bash
+git clone https://github.com/cd4u2b0z/oracle-weather.git ~/oracle-weather
+cd ~/oracle-weather && python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python weather_dashboard.py --demo
+```
+
+Demo mode lets you experience Stormy's personality and all weather animations with mock data. Try different scenarios:
+```bash
+python weather_dashboard.py --demo --scenario thunderstorm
+python weather_dashboard.py --demo --scenario snow
+```
+
 ### One-Line Install (Linux)
 ```bash
 git clone https://github.com/cd4u2b0z/oracle-weather.git ~/oracle-weather
