@@ -18,7 +18,7 @@ Usage:
     from engine.rendering import FrameBudget, RenderStats
 """
 
-__version__ = '2.1.1'
+__version__ = '2.3.0'
 __author__ = 'Weather Dashboard Team'
 
 # High-level imports
