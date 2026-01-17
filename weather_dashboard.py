@@ -2183,7 +2183,7 @@ class WeatherDashboard:
     
     def _draw_footer(self):
         """Draw footer bar."""
-        footer = " [S]earch Location | [R]efresh | [A]chievements | [Q]uit "
+        footer = " [S]earch | [R]efresh | [A]chievements | [F]orecast | [?]Help | [Q]uit "
         fx = max(0, (self.width - len(footer)) // 2)
         
         # Background bar
