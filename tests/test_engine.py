@@ -7,13 +7,14 @@ Run with: pytest tests/ -v
 Or: python -m pytest tests/ -v --cov=engine
 """
 import sys
+import os
 import math
 import time
 import pytest
 from unittest.mock import Mock, MagicMock
 
 # Add parent to path for imports
-sys.path.insert(0, '..')
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from engine.physics.noise import (
     PerlinNoise, SimplexNoise, FractalNoise, DomainWarp, NoiseConfig
