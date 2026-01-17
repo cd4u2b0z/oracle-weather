@@ -1483,7 +1483,7 @@ class WeatherDashboard:
             return 'refresh'
         
         # L to search location
-        if key in (ord('s'), ord('S')):
+        if key in (ord('s'), ord('S'), ord('l'), ord('L')):
             return 'search'
         
         # A to show achievements
@@ -1510,6 +1510,15 @@ class WeatherDashboard:
                     self.notifications.add_info(f"Switched to {unit} units")
             return None
         
+        
+        # Space to toggle quips
+        if key == ord(" "):
+            self.quip_mode = not self.quip_mode
+            if self.quip_mode:
+                self.current_comment = self.stormy.get_random_quip()
+            else:
+                self.current_comment = self.stormy.get_weather_comment(self.weather)
+            return None
         return None
     
     def _draw_help_overlay(self):
@@ -1521,11 +1530,12 @@ class WeatherDashboard:
             "",
             "  Q       - Quit dashboard",
             "  R       - Refresh weather data",
-            "  S       - Search new location",
+            "  S/L     - Search new location",
             "  A       - View achievements",
             "  F       - Toggle forecast panel",
             "  U       - Toggle metric/imperial",
             "  ?       - Show/hide this help",
+            "  Space   - Toggle Stormy quips",
             "",
             "════════════════════════════════════════════",
             "       Press any key to dismiss",
