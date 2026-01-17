@@ -9,7 +9,7 @@ A professional-grade ASCII weather dashboard and animation system built with Pyt
 
 ![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat&logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat)
-![Version](https://img.shields.io/badge/Version-2.1.1-blue?style=flat)
+![Version](https://img.shields.io/badge/Version-2.2.0-blue?style=flat)
 
 ---
 
@@ -354,7 +354,7 @@ curl "https://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_KEY"
 
 See [CHANGELOG.md](CHANGELOG.md) for full version history.
 
-**Latest: v2.1.1** - Performance improvements and bug fixes
+**Latest: v2.2.0 - Noir Weather Oracle personality overhaul
 
 ---
 

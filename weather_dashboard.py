@@ -710,35 +710,33 @@ class StormyPersonality:
     }
     
     # ═══════════════════════════════════════════════════════════════════════════
-    # ACHIEVEMENTS - Original + New noir-flavored
+    # ACHIEVEMENTS - Now with Nerd Font glyphs and human descriptions
     # ═══════════════════════════════════════════════════════════════════════════
     ACHIEVEMENTS = {
-        # Original achievements with new flavor
-        "first_check": ("📜 The Journey Begins", "Consulted the oracle for the first time. The sky noticed. So did I."),
-        "rain_lover": ("🌧️ Walks-In-Rain", "10 days of rain witnessed. The clouds remember your face now."),
-        "snow_day": ("❄️ Winter's Herald", "The frozen sky spoke. You listened. Bring a coat next time."),
-        "storm_chaser": ("⚡ Voice of Thunder", "Faced the storm's fury and lived. The lightning knows your name."),
-        "night_owl": ("🦉 Walker of Night", "Sought weather wisdom at 3 AM. Questionable choices, excellent dedication."),
-        "early_bird": ("🌅 Dawn Watcher", "Rose before the sun to ask about the sun. Poetic. Concerning."),
-        "temp_extreme_hot": ("🔥 Forged in Fire", "Survived 100°F+. The sun tested you. You passed. Drink water."),
-        "temp_extreme_cold": ("🥶 Heart of Winter", "Braved below 0°F. The cold couldn't break you. Impressive."),
-        "fog_master": ("👻 Mist Walker", "Navigated the veil between worlds. Or just drove in fog. Same thing."),
-        "consistent": ("📅 The Dedicated", "7-day streak. The sky appreciates your commitment to commitment."),
+        # Original achievements - now with Nerd Font glyphs
+        "first_check": ("󰈙 The Journey Begins", "You asked about the weather for the first time. The sky took notice."),
+        "rain_lover": ("󰖗 Walks in Rain", "Ten rainy days and counting. The clouds know your face by now."),
+        "snow_day": ("󰖘 Winter's Herald", "You braved the frozen sky and lived to tell about it."),
+        "storm_chaser": ("󰖓 Voice of Thunder", "You stared down the storm's fury. The lightning remembers."),
+        "night_owl": ("󰖔 Walker of Night", "Checking weather at 3 AM? Questionable life choices, excellent dedication."),
+        "early_bird": ("󰖙 Dawn Watcher", "You rose before the sun just to ask about it. Poetic, if a bit obsessive."),
+        "temp_extreme_hot": ("󰈸 Forged in Fire", "You survived triple digits. The sun tested you and you passed."),
+        "temp_extreme_cold": ("󰖎 Heart of Winter", "Below zero and still standing. The cold couldn't break you."),
+        "fog_master": ("󰖑 Mist Walker", "You navigated the veil between worlds. Or just drove in fog. Same thing."),
+        "consistent": ("󰃭 The Dedicated", "Seven days straight. The sky appreciates your commitment."),
         
         # New achievements
-        "century_club": ("💯 Century Club", "100 weather checks. You're not casual anymore. You're a professional."),
-        "humidity_hero": ("💦 Humidity Hero", "Checked when humidity exceeded 90%. The air was soup."),
-        "wind_warrior": ("💨 Wind Warrior", "Checked during 30+ mph winds. The sky was angry. You showed up anyway."),
-        "perfect_day": ("☀️ Goldilocks", "72°F, clear skies, low humidity. Perfection. It won't last."),
-        "midnight_oracle": ("🌙 Midnight Oracle", "Checked at exactly midnight. The veil between days is thin there."),
-        "marathon_watcher": ("⏰ Marathon Watcher", "10 checks in one day. Obsessive? Perhaps. Informed? Definitely."),
-        "lucky_seven": ("🎰 Lucky Seven", "77°F. The universe aligned. Quick—buy a lottery ticket."),
-        "noir_night": ("🎷 Noir Night", "Rainy night check. The saxophone plays. The clouds weep. Perfect."),
-        "vault_dweller": ("🏠 Vault Dweller", "Checked during severe weather warning. Smart. Safe. Vault-approved."),
-        "weekend_warrior": ("🎉 Weekend Warrior", "Checked every weekend for a month. Weekends deserve weather wisdom too."),
+        "century_club": ("󰆥 Century Club", "One hundred weather checks. You've gone from casual to professional."),
+        "humidity_hero": ("󰖌 Humidity Hero", "You checked when the air was basically soup. Respect."),
+        "wind_warrior": ("󰖝 Wind Warrior", "Thirty mile per hour winds and you still showed up. Brave or foolish? Both."),
+        "perfect_day": ("󰖙 Goldilocks", "72 degrees, clear skies, low humidity. Perfection exists. Briefly."),
+        "midnight_oracle": ("󰽥 Midnight Oracle", "You checked at the stroke of midnight. The veil between days is thin there."),
+        "marathon_watcher": ("󰥔 Marathon Watcher", "Ten checks in one day. Obsessive? Perhaps. Well-informed? Absolutely."),
+        "lucky_seven": ("󰗇 Lucky Seven", "77 degrees exactly. The universe winked at you. Go buy a lottery ticket."),
+        "noir_night": ("󰎈 Noir Night", "Rainy night, checking weather. Somewhere a saxophone plays. Perfect."),
+        "vault_dweller": ("󱂵 Vault Dweller", "Severe weather warning and you're safely inside checking forecasts. Smart."),
+        "weekend_warrior": ("󰧗 Weekend Warrior", "Every weekend for a month. Weekends deserve weather wisdom too."),
     }
-    
-    # ═══════════════════════════════════════════════════════════════════════════
     # QUIPS - Random wisdom in various styles
     # ═══════════════════════════════════════════════════════════════════════════
     QUIPS = [

@@ -8,17 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.2.0] - 2026-01-16
 
 ### Added
-- **🎷 Noir Weather Oracle** - Complete personality system overhaul
+- **󰎈 Noir Weather Oracle** - Complete personality system overhaul
   - 6 mood modes: noir, wasteland, prophet, crooner, absurdist, philosophical
   - Noir Detective style: Hard-boiled weather narration
   - Fallout/Wasteland: Vault-Tec approved observations
   - Elder Scrolls/Prophet: Mystical weather prophecies
   - Crooner: Jazz era musical references (Sinatra, Ink Spots, Mills Brothers)
   - Absurdist: Monty Python inspired weather commentary
-- **Temperature-based comments** - Unique observations for freezing/cold/cool/mild/warm/hot
-- **Time-based greetings** - Period-appropriate greetings (morning/afternoon/evening/night)
-- **15 new achievements** - century_club, humidity_hero, wind_warrior, perfect_day, noir_night, and more
-- **40+ quips** - Philosophical observations across all personality styles
+- **󰔏 Temperature comments** - Unique observations for freezing, cold, cool, mild, warm, and hot
+- **󰥔 Time-based greetings** - Period-appropriate greetings throughout the day
+- **󰆥 15 new achievements** - Century club, noir night, vault dweller, and more
+- **󰔊 40+ quips** - Philosophical observations across all personality styles
 
 ### Changed
 - StormyPersonality class completely rewritten (~700 lines)
@@ -35,9 +35,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.1.1] - 2026-01-16
 
 ### Fixed
-- **Startup Performance** - Extended data (forecast, alerts, astro) now fetched in background thread
-- **Loading Animation** - Reduced delay from 1.2s to 0.4s
-- **Broken venv** - Recreated virtual environment with correct paths after project rename
+- **󱀝 Startup Performance** - Extended data now fetched in background thread
+- **󰔟 Loading Animation** - Reduced delay from 1.2s to 0.4s
+- **󰏗 Broken venv** - Recreated virtual environment after project rename
 
 ### Changed
 - Extended weather data loads lazily after first frame renders
@@ -46,12 +46,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.1.0] - 2026-01-16
 
 ### Added
-- **Creatures Module** - Extracted easter egg creature system to `engine/creatures/`
+- **󱗆 Creatures Module** - Extracted easter egg creature system to `engine/creatures/`
   - 11 weather categories with unique animated creatures
   - `CreatureManager` class with backwards-compatible `EasterEggManager` alias
   - Proper module structure with type hints and documentation
-- **Improved lib package** - Proper `__all__` exports and lazy loading
-- **ParticleSystem enhancements** - Added `clear()` and `__len__()` methods
+- **󰏗 Improved lib package** - Proper `__all__` exports and lazy loading
+- **󰂓 ParticleSystem enhancements** - Added `clear()` and `__len__()` methods
 
 ### Changed
 - Renamed project from `asciimatics-weather-toys` to `oracle-weather`
@@ -70,14 +70,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.0] - 2026-01-16
 
 ### Added
-- **Professional Engine Architecture**
+- **󰒓 Professional Engine Architecture**
   - `engine/physics/` - Perlin noise, particle physics, atmospheric simulation
   - `engine/rendering/` - Performance-aware frame rendering with layer management
   - `engine/personality/` - AI personality system with mood states
   - `engine/effects/` - Special weather effects (aurora, rainbows, fog, heat shimmer)
   - `engine/creatures/` - Easter egg animated creatures for each weather type
 
-- **New Features**
+- **󰐗 New Features**
   - 7-day forecast panel with condition icons
   - Weather alerts and warnings display
   - Location search with 'S' key
