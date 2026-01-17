@@ -174,6 +174,47 @@ Examples:
 
 ---
 
+## 󰆥 Achievements
+
+Oracle Weather includes an achievement system that rewards you for checking the weather under various conditions. It's like collecting badges for being obsessive about meteorology.
+
+### How It Works
+
+Every time you open the dashboard, Stormy checks current conditions against achievement criteria. Achievements unlock automatically when conditions are met—no action required on your part. Your progress persists between sessions in `~/.stormy_data.json`.
+
+Press `A` to view your unlocked achievements.
+
+### Achievement List
+
+| Achievement | Trigger | Description |
+|-------------|---------|-------------|
+| 󰈙 **The Journey Begins** | First weather check | Welcome to the club |
+| 󰖗 **Walks in Rain** | 10 rainy days checked | The clouds know your face |
+| 󰖘 **Winter's Herald** | Check during snow | Brave the frozen sky |
+| 󰖓 **Voice of Thunder** | Check during thunderstorm | The lightning remembers |
+| 󰖔 **Walker of Night** | Check between midnight-5 AM | Questionable life choices |
+| 󰖙 **Dawn Watcher** | Check between 5-6 AM | Rise before the sun |
+| 󰈸 **Forged in Fire** | Check when 100°F+ | Survived triple digits |
+| 󰖎 **Heart of Winter** | Check when below 0°F | The cold couldn't break you |
+| 󰖑 **Mist Walker** | Check during fog | Navigate the veil |
+| 󰃭 **The Dedicated** | 7-day check streak | Commitment to commitment |
+| 󰆥 **Century Club** | 100 total checks | You're a professional now |
+| 󰖌 **Humidity Hero** | Check when humidity > 90% | The air was soup |
+| 󰖝 **Wind Warrior** | Check during 30+ mph winds | Brave or foolish? Both |
+| 󰖙 **Goldilocks** | 72°F, clear, low humidity | Perfection exists briefly |
+| 󰽥 **Midnight Oracle** | Check at exactly midnight | The veil between days |
+| 󰥔 **Marathon Watcher** | 10 checks in one day | Obsessive? Perhaps |
+| 󰗇 **Lucky Seven** | Check when exactly 77°F | The universe winked |
+| 󰎈 **Noir Night** | Rainy night check | Somewhere a saxophone plays |
+| 󱂵 **Vault Dweller** | Check during severe weather warning | Smart and safe |
+| 󰧗 **Weekend Warrior** | Check every weekend for a month | Weekends deserve weather |
+
+### Why Achievements?
+
+Because checking the weather should feel like an adventure. Stormy notices your dedication and rewards persistence, curiosity, and questionable sleep schedules.
+
+---
+
 ## 󰙅 Project Structure
 
 ```
