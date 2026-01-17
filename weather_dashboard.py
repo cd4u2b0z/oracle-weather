@@ -1236,7 +1236,7 @@ class WeatherDashboard:
             return 'refresh'
         
         # L to search location
-        if key in (ord('l'), ord('L')):
+        if key in (ord('s'), ord('S')):
             return 'search'
         
         # A to show achievements
@@ -1274,7 +1274,7 @@ class WeatherDashboard:
             "",
             "  Q       - Quit dashboard",
             "  R       - Refresh weather data",
-            "  L       - Search new location",
+            "  S       - Search new location",
             "  A       - View achievements",
             "  F       - Toggle forecast panel",
             "  U       - Toggle metric/imperial",
