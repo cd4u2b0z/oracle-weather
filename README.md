@@ -14,8 +14,8 @@ A professional-grade ASCII weather dashboard and animation system built with Pyt
 
 ---
 
-<!-- TODO: Add screenshot or GIF demo here -->
-<!-- ![Demo](assets/demo.gif) -->
+
+![Demo](assets/demo.gif)
 
 ## 󰓎 Features
 
