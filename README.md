@@ -5,13 +5,17 @@
 
 **Stormy - Weather Oracle of the Terminal**
 
-A professional-grade ASCII weather dashboard and animation system built with Python and asciimatics. Features live weather integration, physics-based particle simulation, atmospheric modeling, and an AI (coming soon) personality named Stormy.
+A professional-grade ASCII weather dashboard and animation system built with Python and asciimatics. Features live weather integration, physics-based particle simulation, atmospheric modeling, and a snarky AI personality named Stormy.
 
 ![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat&logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat)
 ![Version](https://img.shields.io/badge/Version-2.2.0-blue?style=flat)
+![Tests](https://github.com/cd4u2b0z/oracle-weather/actions/workflows/test.yml/badge.svg)
 
 ---
+
+<!-- TODO: Add screenshot or GIF demo here -->
+<!-- ![Demo](assets/demo.gif) -->
 
 ## 󰓎 Features
 
@@ -40,14 +44,6 @@ A professional-grade ASCII weather dashboard and animation system built with Pyt
 | 󰘨 **Procedural Noise** | Perlin, Simplex, Fractal noise + Domain Warping |
 | 󰔊 **Personality Engine** | Mood state machine with weather-aware dialogue |
 | 󱕍 **Render Stats** | FPS tracking, adaptive quality scaling |
-
-### Planned Features (v2.1)
-> These modules exist in `lib/` but are not yet fully integrated into the dashboard UI:
-- 7-day forecast panel
-- NWS weather alerts
-- Astronomical data (sunrise/sunset, moon phases)
-- UV index and air quality monitoring
-- Achievement system
 
 ---
 
@@ -100,7 +96,7 @@ cd ~/oracle-weather
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate  # Linux/macOS
-# .venv\Scripts\activate   # Windows (not fully tested)
+# .venv\Scripts\activate   # Windows (Linux/macOS recommended)
 ```
 
 ### Step 3: Install Dependencies
