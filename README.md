@@ -5,7 +5,7 @@
 
 **Stormy - Weather Oracle of the Terminal**
 
-A professional-grade ASCII weather dashboard and animation system built with Python and asciimatics. Features live weather integration, physics-based particle simulation, atmospheric modeling, and an AI personality named Stormy.
+A professional-grade ASCII weather dashboard and animation system built with Python and asciimatics. Features live weather integration, physics-based particle simulation, atmospheric modeling, and an AI (coming soon) personality named Stormy.
 
 ![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat&logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat)
