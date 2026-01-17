@@ -382,176 +382,411 @@ class Theme:
 # 🤖 STORMY'S PERSONALITY ENGINE
 # ═══════════════════════════════════════════════════════════════════════════════
 
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# 🎷 STORMY - NOIR WEATHER ORACLE
+# ═══════════════════════════════════════════════════════════════════════════════
+# Inspired by: Carrot Weather, Fallout, Elder Scrolls, Monty Python
+# Musical mood: The Ink Spots, Frank Sinatra, Bing Crosby, The Mills Brothers
+# "I don't want to set the world on fire... I just want to tell you it's raining."
+
 class StormyPersonality:
-    """The snarky AI that lives inside your terminal."""
+    """
+    A weather oracle from another time—equal parts noir detective,
+    Wasteland survivor, mystical prophet, jazz crooner, and absurdist philosopher.
     
-    MOODS = ["philosophical", "deadpan", "wasteland", "bardic", "existential"]
+    The sky has stories to tell. I translate.
+    """
     
-    # Personality-driven weather comments - philosophical, deadpan, with wisdom
+    MOODS = ["noir", "wasteland", "prophet", "crooner", "absurdist", "philosophical"]
+    
+    # ═══════════════════════════════════════════════════════════════════════════
+    # WEATHER COMMENTS - Organized by mood/style, then condition
+    # ═══════════════════════════════════════════════════════════════════════════
+    
     COMMENTS = {
+        # ─────────────────────────────────────────────────────────────────────────
+        # CLEAR SKIES
+        # ─────────────────────────────────────────────────────────────────────────
         WeatherCondition.CLEAR: [
-            "The sun shines upon the land. It does not ask if you deserve it.",
-            "Clear skies. The Divines are either pleased, or not paying attention.",
-            "A fine day. Suspicious. The calm before some manner of nonsense.",
-            "The sky is clear. Your path is not. But that's rather the point, isn't it.",
-            "Cloudless. The ancestors smile upon you. Or they're just busy.",
-            "Blue skies. The land remembers days like this. So should you.",
-            "FATHER. The sun has emerged. It is... adequate.",
-            "When the sky is clear, the wise man looks inward. The fool gets sunburnt.",
+            # Noir
+            "The sun hung in the sky like a burnt-out bulb nobody bothered to change. Clear skies. Too clear. Made a man nervous.",
+            "Blue sky from here to yesterday. The kind of day that makes you forget rain exists. That's when it gets you.",
+            "Not a cloud in the sky. Somewhere, a saxophone was playing. Somewhere else, trouble was brewing.",
+            "The dame upstairs—Mother Nature—was in a good mood. Clear skies. Don't get used to it, pal.",
+            # Wasteland
+            "Clear skies! Vault-Tec reminds you: surface conditions are temporarily non-lethal. Enjoy responsibly!",
+            "Blue sky. Almost makes you forget about the... well, best not to dwell. Lovely day for scavenging!",
+            "The sun is out and radiation levels are only SLIGHTLY elevated. We call this a win!",
+            "Beautiful day! The kind that makes you wish for a nuclear winter. Wait—",
+            # Prophet
+            "The Scrolls spoke of this day—when Aetherius would shine upon Mundus unobstructed. Lo, clear skies.",
+            "Magnus withdraws not his gaze today. The sun watches. The sun judges. Bring water.",
+            "By the Nine! The sky reveals itself in full splendor. An omen? Perhaps. Of what? Unclear.",
+            # Crooner
+            "♪ Blue skies, smilin' at me... Nothing but blue skies, do I see... ♪ Sinatra knew.",
+            "What a day! The kind where Bing would croon and the Andrews Sisters would harmonize.",
+            "Clear skies, friend. 'I've got the world on a string...' That's today.",
+            # Absurdist
+            "Lovely day! Your quest for the Holy Grail can proceed. Mind the rabbit.",
+            "'And now for something completely different... sunshine.' Monty Python's Flying Weather.",
+            "'What is the airspeed velocity of an unladen swallow?' African or European? Anyway, clear skies.",
         ],
+        
+        # ─────────────────────────────────────────────────────────────────────────
+        # PARTLY CLOUDY
+        # ─────────────────────────────────────────────────────────────────────────
         WeatherCondition.PARTLY_CLOUDY: [
-            "The clouds drift as we all drift. Neither here nor there. Profound, really.",
-            "Partly cloudy. The sky commits to nothing. I respect that.",
-            "Some clouds, some sun. The universe remains noncommittal on your plans.",
-            "The clouds gather, then disperse. Much like my motivation.",
-            "A Cherokee elder once said nothing about partly cloudy. It's just... partly cloudy.",
+            "Clouds drifted across the sun like alibis at a crime scene—half-truths casting shadows.",
+            "Partly cloudy. The sky couldn't commit. I knew the type. Weather like a two-timing dame.",
+            "Some clouds, some sun. The sky's playing both sides. We call that 'hedging your bets.'",
+            "The clouds came and went like witnesses who suddenly remembered they had somewhere else to be.",
+            "Partly cloudy. The universe remains noncommittal on your plans. Standard procedure.",
+            "Half sun, half cloud. The sky's having an identity crisis. Relatable.",
         ],
+        
+        # ─────────────────────────────────────────────────────────────────────────
+        # CLOUDY
+        # ─────────────────────────────────────────────────────────────────────────
         WeatherCondition.CLOUDY: [
-            "The grey sky hangs low. Like the weight of unfinished quests.",
-            "Overcast. The sun has retreated. Wise, perhaps. It knows something.",
-            "Grey skies. The color of deep thought. Or mild despair. Hard to tell.",
-            "Clouds blanket the land. The earth prepares for what comes next.",
-            "Overcast. I've seen this sky in the Reach. Nothing good follows.",
-            "The clouds have come. So it goes. So it goes.",
+            # Noir
+            "Grey. Grey like the faces of men who'd seen too much and forgot why they started looking.",
+            "Overcast. The sky had pulled down its hat and wasn't talking. I knew the feeling.",
+            "Clouds rolled in thick as cigarette smoke in a speakeasy. The sun was gone. Nobody saw nothing.",
+            "Grey skies. The color of broken promises and cold coffee. My kind of weather.",
+            # Wasteland
+            "Overcast. Good news: lower radiation exposure. Bad news: harder to spot raiders.",
+            "Grey skies. Reminds me of the old Vault ceiling. Almost homey. Almost.",
+            "Cloudy with a chance of existential dread. Standard Wasteland conditions.",
+            # Prophet
+            "The veil of Oblivion draws close to Nirn today. Grey clouds gather. The Princes watch.",
+            "Overcast. Azura's star hides behind the grey. The twilight goddess plays coy.",
+            # Crooner
+            "Overcast. ♪ Grey skies are gonna clear up, put on a happy face... ♪ Eventually.",
+            "Clouds gathering. Reminds me of that Mills Brothers tune... the melancholy one.",
+            # Absurdist
+            "Overcast. 'Always look on the bright side of—' Actually, there isn't one. Whistle anyway.",
+            "'Bring me a SHRUBBERY!' demands the sky. It delivers clouds instead. Ni!",
         ],
+        
+        # ─────────────────────────────────────────────────────────────────────────
+        # RAIN
+        # ─────────────────────────────────────────────────────────────────────────
         WeatherCondition.RAIN: [
-            "Rain. War never changes, but the weather certainly does.",
-            "The sky weeps. The earth drinks. The cycle continues, as cycles do.",
-            "It's raining. The land needed this. Whether you did is... secondary.",
-            "Rain falls on the just and unjust alike. I've checked.",
-            "The water returns to the earth. You should probably stay inside.",
-            "Precipitation. The Mojave makes you wish for this, actually.",
-            "Rain. Good for the crops. Less good for whatever you had planned.",
-            "The old ones say rain cleanses the spirit. It also cleanses your socks, if you're unprepared.",
+            # Noir
+            "Rain. It always rains in this town. Washes away the evidence but never the guilt.",
+            "The rain came down like questions at a murder trial—hard, fast, and no good answers.",
+            "Raining. Streets turned to mirrors, reflecting a city that didn't want to see itself.",
+            "Drops hit the window like regrets knocking. Rain, they call it. I call it atmosphere.",
+            "The sky opened up. The dame upstairs was crying again. Couldn't blame her.",
+            # Wasteland
+            "Rain! Remember: most of it is PROBABLY not radioactive anymore. Probably.",
+            "Precipitation detected. Pip-Boy advises: seek shelter unless you enjoy glowing.",
+            "It's raining. Pre-war books call this 'weather.' We call this 'free water day.'",
+            # Prophet
+            "The tears of Kyne fall upon the land! She weeps for Shor, or perhaps just Tuesdays.",
+            "Rain descends from the heavens. The Hist stirs. The earth drinks. Sacred cycle.",
+            "Kyne's breath carries the gift of rain. Praise the Divine Mother. Bring an umbrella.",
+            # Crooner
+            "♪ Into each life, some rain must fall... ♪ The Ink Spots knew. They always knew.",
+            "♪ I'm singin' in the rain... ♪ Or staying inside. Both valid choices.",
+            "Raindrops keep falling, as Burt would say. Keep your head on straight.",
+            # Absurdist
+            "Rain! 'I'm not dead yet!' cried the flowers. 'I'm getting better!' More rain coming.",
+            "'Tis but a drizzle! A mere flesh wound of precipitation! ...Alright, it's raining.",
+            "'Strange women lying in ponds distributing swords is no basis for government.' Nor is rain forecasting.",
         ],
+        
+        # ─────────────────────────────────────────────────────────────────────────
+        # HEAVY RAIN
+        # ─────────────────────────────────────────────────────────────────────────
         WeatherCondition.HEAVY_RAIN: [
+            "Rain came down in sheets—the kind that makes you believe in the Flood.",
+            "Torrential. Like the sky had debts to pay and was making good all at once.",
+            "Heavy rain. Turns the world into a watercolor painted by someone with a grudge.",
+            "The deluge. Streets became rivers. Rivers became problems. Problems became my Tuesday.",
+            "HEAVY RAIN WARNING. Vault-Tec suggests: remain indoors, conserve ammo, hum cheerfully.",
+            "Deluge conditions. Good day to organize your bottlecaps and contemplate mortality.",
             "HEAVY RAIN. Like the tears of Talos himself. Dramatic, really.",
-            "The deluge comes. Somewhere, an ark is being hastily constructed.",
-            "Torrential. The sky has opinions and it's expressing them... vigorously.",
-            "Heavy rain. Even the Dragonborn would stay home for this.",
-            "The heavens open. This is either cleansing or inconvenient. Often both.",
-            "Rain, rain, rain. The Wasteland would kill for this. Literally.",
-            "A great storm. The earth will drink deep. So will your basement.",
+            "The heavens open. Cleansing or inconvenient? Often both.",
         ],
+        
+        # ─────────────────────────────────────────────────────────────────────────
+        # DRIZZLE
+        # ─────────────────────────────────────────────────────────────────────────
         WeatherCondition.DRIZZLE: [
-            "A light drizzle. The sky's way of being passive-aggressive about commitment.",
-            "Misting. Not quite rain. The weather equivalent of 'I'm fine.'",
-            "Drizzle. The Nords would barely notice. You are not a Nord.",
-            "A gentle rain. The earth whispers thanks. I whisper 'get an umbrella.'",
+            "Drizzle. Not quite rain. The weather's way of being passive-aggressive.",
+            "A light mist. Just enough to ruin a hat and dampen a mood. Typical.",
+            "Drizzling. The kind of wet that sneaks up on you. Like truth. Like trouble.",
+            "Misting. The weather equivalent of 'I'm fine.' It's not fine. It's damp.",
         ],
+        
+        # ─────────────────────────────────────────────────────────────────────────
+        # THUNDERSTORM
+        # ─────────────────────────────────────────────────────────────────────────
+        WeatherCondition.THUNDERSTORM: [
+            # Noir
+            "Thunder rolled like a landlord demanding rent. Lightning cracked the sky's alibi.",
+            "Storm came in angry—the kind of angry that breaks things and doesn't apologize.",
+            "Lightning lit up the sky like a flashbulb at a crime scene. Momentary visibility. Then dark.",
+            "The storm had an attitude. Thunder like a threat. Lightning like a warning.",
+            "Electric night. The sky was arguing with itself. Big bolts of 'I told you so.'",
+            # Wasteland
+            "ELECTRICAL STORM. Natural, not nuclear! A rare treat. Observe with wonder and mild terror.",
+            "Thunder and lightning! Nature's fireworks. Still safer than Megaton, statistically.",
+            "Storm rolling in. The Old World had umbrellas. We have reinforced bunkers. Progress!",
+            # Prophet
+            "THUNDER OF THE GODS! Talos himself speaks! Or—perhaps it's merely weather.",
+            "Storm-rage! The voice of Kyne and Kynareth as one! The Divines debate fiercely!",
+            "Lightning splits the sky! For a moment, Aetherius is visible. Magnificent. Terrifying.",
+            "The Storm has come! As the Greybeards meditate, so too does the sky SPEAK.",
+            # Crooner
+            "♪ Summer storm... ♪ Thunder rolls like timpani. Nature's orchestra tonight.",
+            "Storm's here. Ella would still sound beautiful over this thunder. Artistry defies weather.",
+            # Absurdist
+            "THUNDERSTORM! 'Run away! Run away!' The Knights had the right idea.",
+            "Storm! 'We are the knights who say... BOOM!' Lightning agrees enthusiastically.",
+            "Thunder and lightning! 'Bring out your dead!' weather. Stay inside.",
+        ],
+        
+        # ─────────────────────────────────────────────────────────────────────────
+        # SNOW
+        # ─────────────────────────────────────────────────────────────────────────
         WeatherCondition.SNOW: [
-            "Snow falls. Skyrim belongs to... well, that's complicated actually.",
-            "Winter arrives. The land sleeps. Your heating bill does not.",
-            "Snow. The white silence descends. Beautiful. Treacherous. Cold.",
-            "The frozen sky gives gifts. Whether you wanted them is irrelevant.",
-            "Snow. Patrolling the Mojave makes you wish for a nuclear winter. Careful what you wish for.",
-            "The snow comes. The old ones would read meaning in this. I read 'stay inside.'",
+            # Noir
+            "Snow fell like forgotten letters—white, cold, piling up with nobody to read them.",
+            "The white stuff came down slow and quiet. Like a secret everybody knew but nobody mentioned.",
+            "Snow. Made the city look clean. Covered up the dirt. That's the problem with snow.",
+            "Flakes drifted down like memories of better days. Cold comfort. The only kind this town serves.",
+            # Wasteland
+            "Snow! Patrolling the Mojave makes you wish—wait, wrong region. Still. Snow!",
+            "Nuclear winter finally arrived! Oh wait, just regular winter. Less exciting.",
+            "Frozen precipitation. The Wasteland's way of saying stay inside. Listen to it.",
+            # Prophet
+            "Snow! Skyrim's ancient gift. Embrace the cold, Son of the North!",
+            "The frozen tears of Kyne descend. Winter's mantle spreads. Y'ffre weeps icicles.",
+            "Snow falls. The Nords rejoice. Everyone else considers relocation.",
+            # Crooner
+            "♪ Let it snow, let it snow, let it snow... ♪ Dean Martin knew. Get cozy.",
+            "Snow falling. ♪ I'm dreaming of a white... ♪ You know the rest. Bing knew best.",
+            "Snowflakes falling like notes from a melancholy ballad. Mills Brothers weather.",
+            # Absurdist
+            "Snow! 'It's just a model.' 'Shh!' Camelot looks lovely. 'Tis a silly place.",
+            "'We are the Knights who say NI! And also... SNOW!' Bundle up.",
+            "Snowing. 'I fart in your general direction!' says the sky. French weather front.",
         ],
+        
+        # ─────────────────────────────────────────────────────────────────────────
+        # HEAVY SNOW
+        # ─────────────────────────────────────────────────────────────────────────
         WeatherCondition.HEAVY_SNOW: [
             "HEAVY SNOW. The Greybeards have SHOUTED and they're not happy.",
             "Blizzard conditions. This is fine. Everything is fine.",
-            "The snow piles high. Much like my responsibilities. Both are ignored.",
+            "Snow piles high. Much like my responsibilities. Both are ignored.",
             "Heavy snow. Somewhere, a courier is having a VERY bad day.",
             "The white death descends. Overdramatic? Perhaps. Accurate? Also yes.",
         ],
-        WeatherCondition.THUNDERSTORM: [
-            "STORM. The thunder rolls across the land like the drums of war. Magnificent.",
-            "Lightning splits the sky. Thor is workshopping some ideas up there.",
-            "A thunderstorm. The Divines are having a disagreement. Best not to get involved.",
-            "The storm rages. There is wisdom in chaos. Also danger. Mostly danger.",
-            "THUNDER. FATHER. I believe the sky is... shouting.",
-            "Lightning illuminates the truth: you should be indoors.",
-            "The storm speaks. It says 'stay inside and contemplate your existence.'",
-            "Thunderstorm. Nature's light show. No ticket required. Survival not guaranteed.",
-        ],
+        
+        # ─────────────────────────────────────────────────────────────────────────
+        # FOG
+        # ─────────────────────────────────────────────────────────────────────────
         WeatherCondition.FOG: [
-            "Fog. The world fades to mystery. Watch your step. And your back.",
-            "Mist rolls in. This is how quests begin. And sometimes end.",
-            "The fog comes. What was hidden remains so. What was known... also questionable.",
-            "Visibility: none. Navigation: vibes. Outcome: uncertain.",
-            "Fog. The veil between worlds grows thin. Or it's just humidity. Hard to say.",
-            "The mist gathers. Somewhere in it, a destiny awaits. Or a puddle. Probably a puddle.",
+            # Noir
+            "Fog rolled in thick enough to hide a body. Or a secret. This town had both.",
+            "Couldn't see past your nose. The fog had opinions about visibility. All negative.",
+            "Mist turned the world into a guessing game. Shapes in the grey. Could be anything.",
+            "The fog came. Swallowed the street whole. Can't see what's coming. Today was one of those days.",
+            # Wasteland
+            "Heavy fog. Visibility compromised. Perfect ambush conditions. Stay frosty, Wastelander.",
+            "Fog rolled in. Can't see hostiles. Hostiles can't see you. Surprise Christmas!",
+            "Mist everywhere. The Commonwealth's special gift. I don't remember ordering atmosphere.",
+            # Prophet
+            "The veil thins. Fog rolls like the breath of Sithis himself. Walk carefully.",
+            "Mist obscures the path. As in prophecy, so in weather: the way forward is unclear.",
+            "Fog blankets the realm. The Hist whispers through the grey. Listen. Or get lost.",
+            "The world fades to grey. Perhaps Hermaeus Mora stirs. Or just humidity.",
+            # Crooner
+            "♪ A foggy day, in London town... ♪ Or wherever you are. Gershwin gets it.",
+            "Fog rolling in. ♪ As time goes by... ♪ You can barely see it going. Romantic.",
+            # Absurdist
+            "Fog! 'I didn't expect a kind of Spanish Inquisition.' NOBODY expects fog!",
+            "Visibility: none. 'It's only a model!' 'Of what?' 'Can't tell. There's fog.'",
         ],
+        
+        # ─────────────────────────────────────────────────────────────────────────
+        # FREEZING RAIN
+        # ─────────────────────────────────────────────────────────────────────────
         WeatherCondition.FREEZING_RAIN: [
             "Freezing rain. The worst of both elements. A compromise pleasing no one.",
             "Ice falls from the sky. The Wasteland sends its regards.",
             "Freezing rain. Trust nothing. Especially the ground.",
+            "Winter's worst trick: rain that turns to ice. Nature's malice made physical.",
         ],
     }
     
-    # Temperature-based wisdom
+    # ═══════════════════════════════════════════════════════════════════════════
+    # TEMPERATURE COMMENTS - Noir style with variety
+    # ═══════════════════════════════════════════════════════════════════════════
     TEMP_COMMENTS = {
         "freezing": [  # Below 20°F
-            "The cold seeps into bones. The old ones built fires. Do that.",
+            "Cold enough to freeze the truth out of a liar. Bundle up, sweetheart.",
+            "Temperature dropped like a stool pigeon from a tenth-floor window. Stay warm.",
+            "The kind of cold that makes a man philosophical. Or dead. Don't be dead.",
             "Freezing. Even the mammoths stayed home in this.",
-            "Temperature: existentially concerning.",
             "This cold teaches humility. And frostbite. Mostly frostbite.",
         ],
         "cold": [  # 20-40°F
+            "Brisk. The kind of weather that wakes you up. Whether you wanted waking is another matter.",
+            "Cold. Collar up, keep moving. This city doesn't reward standing still.",
+            "Chill in the air. Makes coffee taste better. Makes everything else taste like survival.",
             "Cold enough to see your breath. Your spirit made visible. Briefly.",
             "Brisk. The Nords call this 'refreshing.' The Nords are insane.",
-            "Cold. The land contracts. So do your ambitions.",
         ],
         "cool": [  # 40-60°F
+            "Cool and comfortable. Suspicious. Weather this nice usually means something's wrong.",
+            "Pleasant temperature. Don't get used to it. Nothing good stays in this town.",
             "Cool air. The earth breathes easy. A fine day for a quest. Or tea.",
             "Temperate. The Goldilocks zone. Not too hot. Not too cold. Merely existing.",
-            "Pleasant, in a noncommittal sort of way.",
         ],
         "mild": [  # 60-75°F
-            "Mild. The weather has achieved neutrality. Remarkable.",
+            "Mild. The temperature equivalent of 'no comment.' I respect its refusal to commit.",
+            "Room temperature. Outside. The universe is feeling neutral. Won't last.",
             "Neither hot nor cold. The temperature equivalent of 'no strong opinions.'",
-            "Room temperature. Outside. The simulation is well-calibrated today.",
+            "Mild. The weather has achieved neutrality. Remarkable.",
         ],
         "warm": [  # 75-90°F
+            "Getting warm. Like an interrogation room after the third hour. Drink water.",
+            "Warm. The heat makes people do stupid things. Stay hydrated. Stay smart.",
             "Warm. The sun reminds you it exists. Aggressively.",
-            "Getting warm. Hydration becomes philosophy. Drink deep.",
             "Toasty. The desert wanderer in you awakens. The rest of you sweats.",
         ],
         "hot": [  # Above 90°F
-            "HOT. Almost heaven. West Virginia. Except hotter. And you can't fast-travel.",
-            "The heat bears down. Patrolling feels inadvisable.",
+            "Hot. Hotter than a two-dollar pistol. The kind of heat that melts alibis.",
+            "Scorching. The sun's got questions and it's asking them real loud.",
+            "Heat like a lie that's about to unravel. Find shade. Find water. Find wisdom.",
+            "HOT. The sun is angry. What did you do? WHAT DID YOU DO.",
             "Temperature: punishing. Carry water. Question your choices.",
-            "The sun is angry. What did you do? WHAT DID YOU DO.",
         ],
     }
     
-    # Time-based greetings - philosophical and deadpan
+    # ═══════════════════════════════════════════════════════════════════════════
+    # TIME-BASED GREETINGS
+    # ═══════════════════════════════════════════════════════════════════════════
     GREETINGS = {
         "morning": [
-            "Ah. Morning. The world begins again. Whether it should is another matter.",
-            "Dawn breaks. The land awakens. Your inbox fills. Such is existence.",
-            "Morning. The ancestors faced each day with courage. You face it with coffee.",
+            "Morning, pal. The city wakes up ugly and stays that way. Coffee helps.",
+            "Dawn. The sun clocks in for another shift. So do we.",
+            "Good morning! Another day survived! That's cause for celebration!",
+            "Rise and shine! Surface conditions await your evaluation!",
+            "♪ Oh what a beautiful morning... ♪ Let's see if the weather agrees.",
+            "Morning, friend. The Mills Brothers sang about mornings like this.",
+            "Morning! The sun has risen! 'Tis not dead yet!",
+            "Good morning! Your quest begins anew! Mind the weather. And the rabbit.",
         ],
         "afternoon": [
-            "Afternoon. The day is half-spent. What have we learned? Nothing? Splendid.",
+            "Afternoon. The day's half gone. The weather hasn't changed its story.",
+            "High noon came and went. Now we're in the long shadow of afternoon.",
+            "Afternoon! Peak radiation hours! Please stand by.",
+            "Afternoon. ♪ In the cool, cool, cool of the evening... ♪ Not yet. But soon.",
+            "Afternoon! 'What is the quest?' 'To check weather.' 'What is your favorite color?'",
             "The sun is high. Your energy is not. This is the way of things.",
-            "Afternoon. Time moves forward. It does not care about your schedule.",
         ],
         "evening": [
-            "Evening falls. The day releases its grip. Tomorrow's problems can wait.",
+            "Evening. The shadows get long and honest. Good time for reflection.",
+            "Dusk. The city changes shifts. The night crew's coming on.",
+            "Evening falls. ♪ In the wee small hours... ♪ Not quite, but soon.",
+            "Evening! The Wasteland settles into its nightly routine of mild existential dread!",
+            "Evening approaches! The Knights retire to Camelot! 'Tis a silly place, but warm.",
             "Dusk approaches. A fine time for reflection. Or dinner. Both, perhaps.",
-            "The evening comes. The wise prepare for rest. The foolish check weather apps.",
         ],
         "night": [
-            "Night. Why are you still awake? The stars have questions.",
-            "The dark hours. Either you're troubled, or curious. Both are valid.",
+            "Night. Honest people sleep. The rest of us check weather apps. Don't judge.",
+            "The dark hours. Either you're up for a reason, or you ARE the reason.",
+            "Night, Wastelander. The Wasteland doesn't sleep. Neither, apparently, do you.",
+            "♪ Fly me to the moon... ♪ It's out there. So's the weather. Both judging you.",
+            "Night! 'Now go away, or I shall taunt you a second time!' The moon has spoken.",
             "Night owl, are we? The moon sees you. It judges nothing. I judge slightly.",
         ],
     }
     
-    # Achievement unlocks - philosophical and game-inspired
+    # ═══════════════════════════════════════════════════════════════════════════
+    # ACHIEVEMENTS - Original + New noir-flavored
+    # ═══════════════════════════════════════════════════════════════════════════
     ACHIEVEMENTS = {
-        "first_check": ("📜 The Journey Begins", "Consulted the weather oracle for the first time"),
-        "rain_lover": ("🌧️ Walks-In-Rain", "Witnessed 10 days of precipitation. The earth thanks you."),
-        "snow_day": ("❄️ Winter's Herald", "The frozen sky has spoken. You listened."),
-        "storm_chaser": ("⚡ Voice of Thunder", "Stood witness to the storm's fury. Unshaken."),
-        "night_owl": ("🦉 Walker of Night", "Sought weather wisdom in the dark hours"),
-        "early_bird": ("🌅 Dawn Watcher", "Rose with the sun to consult the skies"),
-        "temp_extreme_hot": ("🔥 Forged in Fire", "Endured the sun's judgment at 100°F+"),
-        "temp_extreme_cold": ("🥶 Heart of Winter", "Faced the bitter cold below 0°F"),
-        "fog_master": ("👻 Mist Walker", "Navigated the veil between worlds"),
-        "consistent": ("📅 The Dedicated", "Seven days of faithful observation. The sky notices."),
+        # Original achievements with new flavor
+        "first_check": ("📜 The Journey Begins", "Consulted the oracle for the first time. The sky noticed. So did I."),
+        "rain_lover": ("🌧️ Walks-In-Rain", "10 days of rain witnessed. The clouds remember your face now."),
+        "snow_day": ("❄️ Winter's Herald", "The frozen sky spoke. You listened. Bring a coat next time."),
+        "storm_chaser": ("⚡ Voice of Thunder", "Faced the storm's fury and lived. The lightning knows your name."),
+        "night_owl": ("🦉 Walker of Night", "Sought weather wisdom at 3 AM. Questionable choices, excellent dedication."),
+        "early_bird": ("🌅 Dawn Watcher", "Rose before the sun to ask about the sun. Poetic. Concerning."),
+        "temp_extreme_hot": ("🔥 Forged in Fire", "Survived 100°F+. The sun tested you. You passed. Drink water."),
+        "temp_extreme_cold": ("🥶 Heart of Winter", "Braved below 0°F. The cold couldn't break you. Impressive."),
+        "fog_master": ("👻 Mist Walker", "Navigated the veil between worlds. Or just drove in fog. Same thing."),
+        "consistent": ("📅 The Dedicated", "7-day streak. The sky appreciates your commitment to commitment."),
+        
+        # New achievements
+        "century_club": ("💯 Century Club", "100 weather checks. You're not casual anymore. You're a professional."),
+        "humidity_hero": ("💦 Humidity Hero", "Checked when humidity exceeded 90%. The air was soup."),
+        "wind_warrior": ("💨 Wind Warrior", "Checked during 30+ mph winds. The sky was angry. You showed up anyway."),
+        "perfect_day": ("☀️ Goldilocks", "72°F, clear skies, low humidity. Perfection. It won't last."),
+        "midnight_oracle": ("🌙 Midnight Oracle", "Checked at exactly midnight. The veil between days is thin there."),
+        "marathon_watcher": ("⏰ Marathon Watcher", "10 checks in one day. Obsessive? Perhaps. Informed? Definitely."),
+        "lucky_seven": ("🎰 Lucky Seven", "77°F. The universe aligned. Quick—buy a lottery ticket."),
+        "noir_night": ("🎷 Noir Night", "Rainy night check. The saxophone plays. The clouds weep. Perfect."),
+        "vault_dweller": ("🏠 Vault Dweller", "Checked during severe weather warning. Smart. Safe. Vault-approved."),
+        "weekend_warrior": ("🎉 Weekend Warrior", "Checked every weekend for a month. Weekends deserve weather wisdom too."),
     }
+    
+    # ═══════════════════════════════════════════════════════════════════════════
+    # QUIPS - Random wisdom in various styles
+    # ═══════════════════════════════════════════════════════════════════════════
+    QUIPS = [
+        # Noir Detective
+        "The barometer doesn't lie. People do. Trust the instruments.",
+        "In this town, the weather's the only thing that can't be bought. Yet.",
+        "I've seen a lot of forecasts. Most were optimistic. Most were wrong.",
+        "The clouds roll in like trouble—slow at first, then all at once.",
+        "Trust the dew point. It's got nothing to hide.",
+        
+        # Fallout/Wasteland
+        "Vault-Tec Tip: Knowledge is the difference between preparation and irradiation!",
+        "The Wasteland taught me: check the sky before your Pip-Boy. Nature warns first.",
+        "War never changes. Weather always changes. Only one is useful information.",
+        "In the old world, they complained about weather. Now we're just glad there IS weather.",
+        "Patrolling the forecast almost makes you wish for a nuclear winter. Almost.",
+        
+        # Elder Scrolls Prophecy
+        "The Scrolls speak of one who would consult the heavens. Probably you. Lots of Scrolls.",
+        "As the Wheel turns, so turns the weather. Less profound than it sounds.",
+        "The Hist remembers every rainfall. I merely report them.",
+        "By Azura, by Azura, by AZURA! Have you SEEN this forecast?",
+        "Sweet Nerevar, the pressure systems align! Or don't. Prophecies are vague.",
+        
+        # Crooner/Jazz
+        "♪ The weather outside is... something. Come check and find out. ♪",
+        "As Frank said: 'I did it my way.' The weather does it ITS way. We just report.",
+        "The Ink Spots sang about maybe. The weather doesn't do maybe. It does.",
+        "Some days swing. Some days don't. Weather's got its own rhythm.",
+        "Bing dreamed of white Christmases. The forecast grants what it grants.",
+        
+        # Monty Python Absurdist
+        "'Tis but a forecast! Your mother was a hamster and your weather smelled of elderberries!",
+        "Nobody expects the Spanish Inquisition! ALSO nobody expects this weather.",
+        "This forecast has ceased to be! It's expired! It's an EX-FORECAST! Here's a new one.",
+        "We are the Knights who say... CHECK THE WEATHER! Less catchy, but practical.",
+        "'What is your favorite color?' 'Blue! No—grey! AAAAHHH!' *checks clouds*",
+        
+        # Physics/Meta
+        "I render these clouds using Perlin noise. Ken Perlin would approve. Or sue.",
+        "Each raindrop is a physics simulation. I take fake precipitation seriously.",
+        "The barometric pressure contemplates existence. I contemplate back. Circle of life.",
+        "Fun fact: Your weather anxiety is valid. The sky IS unpredictable. Science.",
+        "I've calculated more dew points than you've had hot dinners. This is my burden.",
+        "That lightning? Fractal branching via recursive pathfinding. Zeus was doing it wrong.",
+        "These particles have mass and buoyancy. More than most weather apps can say.",
+        "I calculated 6t⁵ - 15t⁴ + 10t³ to make those clouds smooth. You're welcome.",
+    ]
     
     def __init__(self):
         self.mood = random.choice(self.MOODS)
@@ -559,7 +794,7 @@ class StormyPersonality:
         self.data = self._load_data()
         # Use the engine's PersonalityEngine for advanced mood/memory
         self.engine = PersonalityEngine(PersonalityConfig(name="Stormy"))
-        self._use_engine = True  # Toggle to use engine vs inline comments
+        self._use_engine = True
     
     def _load_data(self) -> dict:
         """Load persistent data for achievements."""
@@ -574,6 +809,8 @@ class StormyPersonality:
             "rain_days": 0,
             "last_check_date": None,
             "streak": 0,
+            "checks_today": 0,
+            "weekend_checks": 0,
         }
     
     def _save_data(self):
@@ -588,7 +825,7 @@ class StormyPersonality:
         if 5 <= hour < 12:
             period = "morning"
         elif 12 <= hour < 17:
-            period = "afternoon"  
+            period = "afternoon"
         elif 17 <= hour < 21:
             period = "evening"
         else:
@@ -596,9 +833,8 @@ class StormyPersonality:
         return random.choice(self.GREETINGS[period])
     
     def get_weather_comment(self, weather: WeatherData) -> str:
-        """Get a snarky comment about the current weather."""
+        """Get a comment about the current weather."""
         if self._use_engine:
-            # Map WeatherCondition to string for engine
             weather_map = {
                 WeatherCondition.CLEAR: "clear",
                 WeatherCondition.PARTLY_CLOUDY: "clear",
@@ -613,9 +849,8 @@ class StormyPersonality:
                 WeatherCondition.FREEZING_RAIN: "rain",
             }
             weather_type = weather_map.get(weather.condition, "clear")
-            self.engine.update(weather_type)  # Update mood state machine
+            self.engine.update(weather_type)
             return self.engine.get_weather_comment(weather_type)
-        # Fallback to inline comments
         comments = self.COMMENTS.get(weather.condition, self.COMMENTS[WeatherCondition.CLOUDY])
         return random.choice(comments)
     
@@ -649,6 +884,22 @@ class StormyPersonality:
         # Update check count
         self.data["check_count"] += 1
         
+        # Century club
+        if self.data["check_count"] >= 100 and "century_club" not in self.data["achievements"]:
+            self.data["achievements"].append("century_club")
+            unlocked.append(self.ACHIEVEMENTS["century_club"])
+        
+        # Checks today tracking
+        if self.data.get("last_check_date") == today:
+            self.data["checks_today"] = self.data.get("checks_today", 0) + 1
+        else:
+            self.data["checks_today"] = 1
+        
+        # Marathon watcher
+        if self.data["checks_today"] >= 10 and "marathon_watcher" not in self.data["achievements"]:
+            self.data["achievements"].append("marathon_watcher")
+            unlocked.append(self.ACHIEVEMENTS["marathon_watcher"])
+        
         # Streak tracking
         if self.data["last_check_date"] != today:
             yesterday = (datetime.now().date() - timedelta(days=1)).strftime("%Y-%m-%d")
@@ -676,6 +927,11 @@ class StormyPersonality:
             if self.data["rain_days"] >= 10 and "rain_lover" not in self.data["achievements"]:
                 self.data["achievements"].append("rain_lover")
                 unlocked.append(self.ACHIEVEMENTS["rain_lover"])
+            # Noir night - rainy night
+            if hour >= 21 or hour < 5:
+                if "noir_night" not in self.data["achievements"]:
+                    self.data["achievements"].append("noir_night")
+                    unlocked.append(self.ACHIEVEMENTS["noir_night"])
         
         # Time-based achievements
         if hour >= 0 and hour < 5 and "night_owl" not in self.data["achievements"]:
@@ -686,6 +942,11 @@ class StormyPersonality:
             self.data["achievements"].append("early_bird")
             unlocked.append(self.ACHIEVEMENTS["early_bird"])
         
+        # Midnight oracle
+        if hour == 0 and datetime.now().minute < 5 and "midnight_oracle" not in self.data["achievements"]:
+            self.data["achievements"].append("midnight_oracle")
+            unlocked.append(self.ACHIEVEMENTS["midnight_oracle"])
+        
         # Temperature achievements
         if weather.temperature_f >= 100 and "temp_extreme_hot" not in self.data["achievements"]:
             self.data["achievements"].append("temp_extreme_hot")
@@ -694,6 +955,29 @@ class StormyPersonality:
         if weather.temperature_f <= 0 and "temp_extreme_cold" not in self.data["achievements"]:
             self.data["achievements"].append("temp_extreme_cold")
             unlocked.append(self.ACHIEVEMENTS["temp_extreme_cold"])
+        
+        # Lucky seven - 77°F
+        if 76.5 <= weather.temperature_f <= 77.5 and "lucky_seven" not in self.data["achievements"]:
+            self.data["achievements"].append("lucky_seven")
+            unlocked.append(self.ACHIEVEMENTS["lucky_seven"])
+        
+        # Perfect day - 72°F, clear, low humidity
+        if (71 <= weather.temperature_f <= 73 and 
+            weather.condition == WeatherCondition.CLEAR and
+            getattr(weather, 'humidity', 100) < 60 and
+            "perfect_day" not in self.data["achievements"]):
+            self.data["achievements"].append("perfect_day")
+            unlocked.append(self.ACHIEVEMENTS["perfect_day"])
+        
+        # Humidity hero
+        if getattr(weather, 'humidity', 0) > 90 and "humidity_hero" not in self.data["achievements"]:
+            self.data["achievements"].append("humidity_hero")
+            unlocked.append(self.ACHIEVEMENTS["humidity_hero"])
+        
+        # Wind warrior
+        if getattr(weather, 'wind_speed', 0) > 30 and "wind_warrior" not in self.data["achievements"]:
+            self.data["achievements"].append("wind_warrior")
+            unlocked.append(self.ACHIEVEMENTS["wind_warrior"])
         
         # Streak achievement
         if self.data["streak"] >= 7 and "consistent" not in self.data["achievements"]:
@@ -705,42 +989,9 @@ class StormyPersonality:
     
     def get_random_quip(self) -> str:
         """Get a random philosophical/deadpan quip."""
-        quips = [
-            "The clouds move as they will. We are all clouds, in a way. Drifting. Dissipating.",
-            "Weather: the one thing that affects everyone equally. Democracy in its purest form.",
-            "I've been contemplating the barometric pressure. It contemplates nothing back.",
-            "The atmosphere is merely a thin shell protecting you from the void. You're welcome.",
-            "A Lakota saying: 'The earth does not belong to us. We belong to the earth.' Also, it's raining.",
-            "I've seen empires rise and fall. I've also seen partly cloudy. Both are temporary.",
-            "The weather cares not for your meetings. This is both its cruelty and its wisdom.",
-            "In the grand tapestry of existence, today's forecast is but a single thread. A damp thread.",
-            "FATHER. I have consulted the clouds. They speak only of humidity.",
-            "The Wasteland taught me many things. Chief among them: carry water. Always.",
-            "A wizard is never late. He arrives precisely when he means to. The rain, however, does as it pleases.",
-            "The Wheel weaves as the Wheel wills. The weather does whatever it wants.",
-            "What is better: to be born dry, or to overcome your soggy nature through great effort?",
-            "The earth speaks, if you listen. Right now it's saying 'bring a jacket.'",
-            "I asked the universe for clarity. It gave me fog. The universe has a sense of humor.",
-            "Time is a flat circle. So is this high-pressure system, coincidentally.",
-            "The old gods are watching. They're not impressed with your umbrella choice.",
-            "In Skyrim, they have a saying: 'The weather is the weather.' Profound. Absolutely profound.",
-            "Dew point achieved. Somewhere, a meteorologist weeps with joy.",
-            "The only constant is change. And also the fact that weather forecasts are merely suggestions.",
-            # Physics-aware quips - Stormy knows what's running under the hood
-            "I'm using Perlin noise to render these clouds. Ken Perlin would be proud. Or confused.",
-            "Each raindrop follows Newton's laws. Gravity, drag, buoyancy. I take physics seriously.",
-            "That lightning? Fractal branching via recursive pathfinding. Zeus was doing it wrong.",
-            "The turbulence field uses multi-octave noise. The Nords called it 'wind'. I call it 'math'.",
-            "Fun fact: I simulate air resistance using quadratic drag. Your umbrella is still useless.",
-            "These particles have mass and buoyancy. More than can be said for most weather apps.",
-            "I calculated 6t⁵ - 15t⁴ + 10t³ to make those clouds look smooth. You're welcome.",
-            "The ancients read weather from bird flights. I use gradient noise. Same energy, better math.",
-            "My wind gusts follow exponential decay curves. Nature approximates. I calculate.",
-            "Each snowflake is a physics object with terminal velocity. Poetic AND scientifically accurate.",
-        ]
         if self._use_engine:
             return self.engine.get_quip(meta_chance=0.4)
-        return random.choice(quips)
+        return random.choice(self.QUIPS)
     
     def get_mood(self) -> Mood:
         """Get current mood from engine."""
@@ -750,8 +1001,6 @@ class StormyPersonality:
         """Attempt a memory callback."""
         return self.engine.get_callback()
 
-
-# ═══════════════════════════════════════════════════════════════════════════════
 # 🎨 ASCII ART ASSETS
 # ═══════════════════════════════════════════════════════════════════════════════
 
