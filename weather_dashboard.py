@@ -35,9 +35,14 @@ from asciimatics.exceptions import ResizeScreenError
 from asciimatics.event import KeyboardEvent
 
 from lib.weather_api import get_weather, WeatherCondition, WeatherData, search_and_fetch_weather
+from lib.mock_weather import get_demo_weather
 from lib.particles import Particle, ParticleSystem
 from collections import deque
 from typing import List, Tuple, Optional, Dict, Any
+
+# Global demo mode flag
+DEMO_MODE = False
+DEMO_SCENARIO = None
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # 🆕 ENHANCED MODULES - New integrated features
@@ -2378,7 +2383,11 @@ def dashboard_main(screen: Screen):
         screen.refresh()
         time.sleep(0.1)
     
-    weather = get_weather()
+    if DEMO_MODE:
+        from lib.mock_weather import get_demo_weather
+        weather = get_demo_weather(DEMO_SCENARIO)
+    else:
+        weather = get_weather()
     
     if not weather:
         screen.clear()
@@ -2457,9 +2466,36 @@ def dashboard_main(screen: Screen):
 
 
 def main():
-    print("\033[2J\033[H")
-    print("STORMY - Weather Oracle of the Terminal")
-    print("   The sky has wisdom to share...")
+    global DEMO_MODE, DEMO_SCENARIO
+    
+    import argparse
+    parser = argparse.ArgumentParser(
+        description="STORMY - Weather Oracle of the Terminal",
+        epilog="Try it without an API key: python weather_dashboard.py --demo"
+    )
+    parser.add_argument(
+        "--demo", 
+        action="store_true",
+        help="Run in demo mode with mock weather data (no API key needed)"
+    )
+    parser.add_argument(
+        "--scenario",
+        type=str,
+        choices=["clear", "rain", "thunderstorm", "snow", "fog", "cloudy", "drizzle"],
+        help="Demo scenario to display (requires --demo)"
+    )
+    args = parser.parse_args()
+    
+    DEMO_MODE = args.demo
+    DEMO_SCENARIO = args.scenario
+    
+    print("[2J[H")
+    if DEMO_MODE:
+        print("STORMY - Weather Oracle of the Terminal [DEMO MODE]")
+        print("   Experience the weather without an API key...")
+    else:
+        print("STORMY - Weather Oracle of the Terminal")
+        print("   The sky has wisdom to share...")
     
     while True:
         try:
@@ -2469,7 +2505,5 @@ def main():
             pass
     
     print("\nStormy speaks: \"The path continues. The weather changes. You remain. Until next time.\"\n")
-
-
 if __name__ == "__main__":
     main()

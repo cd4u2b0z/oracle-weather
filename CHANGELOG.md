@@ -5,6 +5,19 @@ All notable changes to Oracle Weather will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2026-01-16
+
+### Added
+- **󰈈 Demo Mode** - Try oracle-weather without an API key!
+  - `--demo` flag runs with mock weather data
+  - `--scenario` flag to choose weather type (thunderstorm, snow, rain, etc.)
+  - 8 demo scenarios: clear, rain, thunderstorm, snow, fog, cloudy, heavy snow, drizzle
+- **󱛘 GitHub Topics** - Added discoverability tags (weather, terminal, ascii-art, python, cli, tui, asciimatics)
+
+### Changed
+- Quick Start section now prominently features demo mode
+- First-time users can experience Stormy instantly
+
 ## [2.2.1] - 2026-01-16
 
 ### Added
