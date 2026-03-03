@@ -5,6 +5,38 @@ All notable changes to Oracle Weather will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2026-03-03
+
+### Added
+- **Modular Data Layer** — `data/dialogue.py` (151 weather comments, 50 quips, 26 greetings, temp comments, achievements) and `data/art.py` (BIG_DIGITS, WEATHER_MASCOT, WEATHER_SCENES) extracted from the monolith
+- **Standalone Screen Modules** — `screens/achievements.py`, `screens/search.py`, `screens/bestiary.py` extracted from weather_dashboard.py
+- **Creature Bestiary** — Persistent sighting log in `~/.stormy_data.json`, dedicated bestiary screen (`B` key), 25 ASCII creatures across 11 weather categories
+- **Sparkline History** — SQLite-backed 24h temperature, humidity, and wind trends rendered as block-character sparklines in the sidebar (`lib/sparkline.py`)
+- **Smooth Weather Transitions** — Smoothstep crossfade on refresh and auto-refresh (60-frame ramp, ~2s at 30fps)
+- **pyproject.toml** — Package config with `stormy` CLI entry point, proper setuptools packaging
+- **Forecast toggle** — `F` key to show/hide 7-day forecast panel
+- **Unit toggle** — `U` key to swap metric/imperial
+- **`get_trend_data()`** — New method on `WeatherDatabase` for sparkline data extraction
+
+### Changed
+- **Unified Personality System** — All 151 weather comments now live (previously dead code behind `_use_engine=True` flag). `PersonalityEngine` uses the full dialogue pool from `data/dialogue.py`
+- **StormyPersonality gutted** — From ~600 lines to ~100 line thin wrapper; delegates all dialogue to engine
+- **DialogueBank expanded** — Now includes `get_greeting()`, `get_temp_comment()`, `get_weather_comment_by_condition()`, references full 151-comment pool
+- **Creature spawn rates 4x** — 0.0004 → 0.0015, 0.0005 → 0.0018, 0.0006 → 0.002
+- **Dashboard reduced** — `weather_dashboard.py` from 2509 → 1830 lines (-27%)
+- **Repetition avoidance** — `_max_recent` bumped from 10 to 15
+- **Python version** — Now requires Python 3.10+
+
+### Removed
+- `main.py`, `weather_live_pro.py`, `config_manager.py`, `config.example.yaml` — Dead files from pre-2.0 era
+- `sys.path.insert` hack in `lib/weather_api.py`
+- Dead `config_manager` imports and test classes from `tests/test_extended.py`
+- Inline ASCII art data (~170 lines) and inline screen functions (~150 lines) from dashboard
+
+### Fixed
+- `?` help overlay double-toggle bug — `handle_input()` and `dashboard_main()` both toggled `show_help`, canceling each other out
+- Stale venv shebang after project path change
+
 ## [2.3.0] - 2026-01-16
 
 ### Added

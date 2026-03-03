@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "oracle-weather"
+version = "3.0.0"
+description = "Stormy — terminal weather oracle with physics, personality, and ASCII art"
+requires-python = ">=3.10"
+dependencies = [
+    "asciimatics>=1.14.0",
+    "requests>=2.28.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[project.scripts]
+stormy = "weather_dashboard:main"
+
+[tool.setuptools.packages.find]
+include = ["engine*", "lib*", "data*", "screens*"]
+
+# pytest config lives in pytest.ini

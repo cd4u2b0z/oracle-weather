@@ -943,6 +943,31 @@ class WeatherDatabase:
                 return dict(row)
         return None
     
+    def get_trend_data(self, hours: int = 24, location: str = None) -> dict:
+        """Get recent trend data for sparkline rendering.
+
+        Returns dict with lists of values for temp, wind, humidity
+        sampled at roughly 1-hour intervals over the last `hours` hours.
+        """
+        start_time = time.time() - (hours * 3600)
+        loc = location or LOCATION_NAME
+
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            rows = conn.execute("""
+                SELECT temperature_f, wind_speed_mph, humidity, timestamp
+                FROM weather_log
+                WHERE timestamp > ? AND location = ?
+                ORDER BY timestamp
+            """, (start_time, loc)).fetchall()
+
+        return {
+            "temp": [row["temperature_f"] for row in rows if row["temperature_f"] is not None],
+            "wind": [row["wind_speed_mph"] for row in rows if row["wind_speed_mph"] is not None],
+            "humidity": [row["humidity"] for row in rows if row["humidity"] is not None],
+            "timestamps": [row["timestamp"] for row in rows],
+        }
+
     def export_csv(self, filepath: str, days: int = 30):
         """Export weather history to CSV."""
         import csv

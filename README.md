@@ -5,223 +5,140 @@
 
 **Stormy - Weather Oracle of the Terminal**
 
-A professional-grade ASCII weather dashboard and animation system built with Python and asciimatics. Features live weather integration, physics-based particle simulation, atmospheric modeling, and a snarky AI personality named Stormy.
+A terminal weather dashboard with physics-simulated particles, atmospheric modeling, 25 collectible ASCII creatures, a noir/wasteland/prophet AI personality engine, and 151 lines of hand-written dialogue. Built with Python and asciimatics.
 
-![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat&logo=python&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat&logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat)
-![Version](https://img.shields.io/badge/Version-2.3.0-blue?style=flat)
+![Version](https://img.shields.io/badge/Version-3.0.0-blue?style=flat)
 ![Tests](https://github.com/cd4u2b0z/oracle-weather/actions/workflows/test.yml/badge.svg)
 
 ---
-
 
 ![Demo](assets/demo.gif)
 
 ## 󰓎 Features
 
-### Core Features
+### Core
 | Feature | Description |
 |---------|-------------|
-| **Live Weather** | Real-time weather data from OpenWeatherMap API |
-| **Weather Dashboard** | Full terminal dashboard with sidebar stats + animation |
-| **Multiple Weather Types** | Rain, snow, thunderstorms, fog, clouds, clear sky |
-| **Easter Egg Creatures** | Rare visitors appear based on weather + time |
-| **Personality Engine** | AI companion "Stormy" with mood states and dialogue |
+| **Live Weather** | Dual API: OpenWeatherMap (primary) + OpenMeteo (fallback) |
+| **Physics Particles** | Newtonian rain, snow, fog with drag, buoyancy, and wind forces |
+| **Personality Engine** | "Stormy" — mood state machine with 151 weather comments across 6 voices |
+| **Creature Bestiary** | 25 ASCII creatures spawn by weather + time, persistent sighting log |
+| **Sparkline History** | SQLite-backed 24h temperature, humidity, and wind trends in sidebar |
+| **Smooth Transitions** | Smoothstep crossfade when weather changes on refresh |
+| **20 Achievements** | Persistent progress tracking with Nerd Font glyphs |
+| **Location Search** | Search any city worldwide, instant weather swap |
+| **7-Day Forecast** | Hourly breakdown with condition icons |
+| **Special Effects** | Aurora, rainbow, heat shimmer, frost crystals |
 
 ### Weather Types
-- 󰖗 Rain (light, moderate, heavy, drizzle)
-- 󰖘 Snow (light, moderate, heavy, blizzard)
-- 󰖓 Thunderstorms (with realistic lightning)
-- 󰖑 Fog and mist
-- 󰖐 Clouds (various densities)
-- 󰖙 Clear sky (day and night variants)
+- 󰖗 Rain (drizzle, moderate, heavy, freezing)
+- 󰖘 Snow (light, heavy, blizzard)
+- 󰖓 Thunderstorms (fractal branching lightning)
+- 󰖑 Fog and mist (Perlin noise layers)
+- 󰖐 Clouds (partly cloudy, overcast)
+- 󰖙 Clear sky (day sparkles, night stars)
+
+### Stormy's Voices
+Noir detective, Fallout wasteland survivor, Elder Scrolls prophet, jazz crooner, Monty Python absurdist, and physics meta-commentary. 151 weather-specific lines, 50 random quips, 26 time-of-day greetings, temperature commentary.
 
 ### Engine Modules
 | Module | Description |
 |--------|-------------|
-| 󰂓 **Physics Engine** | Newtonian mechanics with gravity, drag, and wind forces |
-| 󱗆 **Atmospheric Model** | Barometric pressure, stability classification |
-| 󰘨 **Procedural Noise** | Perlin, Simplex, Fractal noise + Domain Warping |
-| 󰔊 **Personality Engine** | Mood state machine with weather-aware dialogue |
-| 󱕍 **Render Stats** | FPS tracking, adaptive quality scaling |
-
----
-
-## 󰏖 Requirements
-
-### System Requirements
-- **OS**: Linux or macOS
-- **Python**: 3.8+
-- **Terminal**: Modern terminal emulator (Kitty recommended)
-- **Display**: Minimum 80x24 terminal size (120x40 recommended)
-
-### Dependencies
-```
-asciimatics>=1.14.0
-requests>=2.28.0
-pyyaml>=6.0
-```
+| 󰂓 **Physics** | Gravity, drag, wind, buoyancy. Euler/Verlet/RK4 integration |
+| 󱗆 **Atmosphere** | Barometric formula, Pasquill-Gifford stability, wind chill, heat index |
+| 󰘨 **Noise** | Perlin, Simplex, Fractal noise + Domain Warping for organic clouds |
+| 󰔊 **Personality** | 8-mood state machine, memory with decay, repetition avoidance |
+| 󱕍 **Rendering** | Frame budget, adaptive quality, layer-ordered render queue |
 
 ---
 
 ## 󰑣 Quick Start
 
-### 󰈈 Try It Now (No API Key Needed!)
+### Demo Mode (No API Key)
 ```bash
-git clone https://github.com/cd4u2b0z/oracle-weather.git ~/oracle-weather
-cd ~/oracle-weather && python3 -m venv .venv && source .venv/bin/activate
+git clone https://github.com/cd4u2b0z/oracle-weather.git
+cd oracle-weather && python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python weather_dashboard.py --demo
 ```
 
-Demo mode lets you experience Stormy's personality and all weather animations with mock data. Try different scenarios:
+Try specific scenarios:
 ```bash
 python weather_dashboard.py --demo --scenario thunderstorm
 python weather_dashboard.py --demo --scenario snow
+python weather_dashboard.py --demo --scenario fog
 ```
 
-### One-Line Install (Linux)
+### Full Install
 ```bash
-git clone https://github.com/cd4u2b0z/oracle-weather.git ~/oracle-weather
-cd ~/oracle-weather && python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-python weather_dashboard.py
-```
-
-### macOS
-```bash
-git clone https://github.com/cd4u2b0z/oracle-weather.git ~/oracle-weather
-cd ~/oracle-weather && python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-python weather_dashboard.py
-```
-
----
-
-## 󰏗 Installation
-
-### Step 1: Clone Repository
-```bash
-git clone https://github.com/cd4u2b0z/oracle-weather.git ~/oracle-weather
-cd ~/oracle-weather
-```
-
-### Step 2: Create Virtual Environment
-```bash
-python3 -m venv .venv
-source .venv/bin/activate  # Linux/macOS
-# .venv\Scripts\activate   # Windows (Linux/macOS recommended)
-```
-
-### Step 3: Install Dependencies
-```bash
+git clone https://github.com/cd4u2b0z/oracle-weather.git
+cd oracle-weather && python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Step 4: Configure API Key
-```bash
-cp config.example.yaml config.yaml
-# Edit config.yaml with your OpenWeatherMap API key
-```
-
-Or edit `config.py` directly:
+Create `config.py`:
 ```python
-OPENWEATHERMAP_API_KEY = "your_api_key_here"
-OPENWEATHERMAP_CITY_ID = "4597040"  # Your city ID
+OPENWEATHERMAP_API_KEY = "your_key_here"      # free at openweathermap.org/api
+OPENWEATHERMAP_CITY_ID = "4597040"
 LATITUDE = 32.4840
 LONGITUDE = -80.1756
+TIMEZONE = "America/New_York"
+LOCATION_NAME = "Summerville, SC"
+CACHE_FILE = "/tmp/oracle_weather_cache.json"
+CACHE_MAX_AGE = 300
 ```
 
-Get a free API key at [openweathermap.org](https://openweathermap.org/api)
-
-### Step 5: Run
+Run:
 ```bash
 python weather_dashboard.py
 ```
 
 ---
 
-## 󰌌 Usage
+## 󰌌 Keyboard Controls
 
-### Commands
-```bash
-# Activate environment first
-source .venv/bin/activate
-
-# Main dashboard (recommended)
-python weather_dashboard.py
-
-# Fullscreen weather animation
-python weather_live.py
-
-# Pro version with enhanced effects
-python weather_live_pro.py
-
-# Demo/title screen
-python main.py
-```
-
-### Keyboard Controls
 | Key | Action |
 |-----|--------|
 | `Q` | Quit |
-| `R` | Refresh weather data |
-| `L` or `S` | Search any location worldwide |
-| `A` | View achievements |
-| `?` | Show help overlay |
+| `R` | Refresh weather (smooth crossfade) |
+| `S` / `L` | Search location worldwide |
+| `A` | Achievements hall of fame |
+| `B` | Creature bestiary |
+| `F` | Toggle forecast panel |
+| `U` | Toggle metric / imperial |
+| `?` | Help overlay |
 | `Space` | Toggle Stormy's quips |
-
-### Location Search
-Press `S` or `L` to search for any city:
-```
-Examples:
-  New York, NY
-  London, UK
-  Tokyo, Japan
-  Paris, France
-  Sydney, Australia
-```
 
 ---
 
 ## 󰆥 Achievements
 
-Oracle Weather includes an achievement system that rewards you for checking the weather under various conditions. It's like collecting badges for being obsessive about meteorology.
+20 achievements tracked persistently in `~/.stormy_data.json`. Unlocked automatically based on weather conditions, time, temperature, streaks, and dedication.
 
-### How It Works
-
-Every time you open the dashboard, Stormy checks current conditions against achievement criteria. Achievements unlock automatically when conditions are met—no action required on your part. Your progress persists between sessions in `~/.stormy_data.json`.
-
-Press `A` to view your unlocked achievements.
-
-### Achievement List
-
-| Achievement | Trigger | Description |
-|-------------|---------|-------------|
-| 󰈙 **The Journey Begins** | First weather check | Welcome to the club |
-| 󰖗 **Walks in Rain** | 10 rainy days checked | The clouds know your face |
-| 󰖘 **Winter's Herald** | Check during snow | Brave the frozen sky |
-| 󰖓 **Voice of Thunder** | Check during thunderstorm | The lightning remembers |
-| 󰖔 **Walker of Night** | Check between midnight-5 AM | Questionable life choices |
-| 󰖙 **Dawn Watcher** | Check between 5-6 AM | Rise before the sun |
-| 󰈸 **Forged in Fire** | Check when 100°F+ | Survived triple digits |
-| 󰖎 **Heart of Winter** | Check when below 0°F | The cold couldn't break you |
-| 󰖑 **Mist Walker** | Check during fog | Navigate the veil |
-| 󰃭 **The Dedicated** | 7-day check streak | Commitment to commitment |
-| 󰆥 **Century Club** | 100 total checks | You're a professional now |
-| 󰖌 **Humidity Hero** | Check when humidity > 90% | The air was soup |
-| 󰖝 **Wind Warrior** | Check during 30+ mph winds | Brave or foolish? Both |
-| 󰖙 **Goldilocks** | 72°F, clear, low humidity | Perfection exists briefly |
-| 󰽥 **Midnight Oracle** | Check at exactly midnight | The veil between days |
-| 󰥔 **Marathon Watcher** | 10 checks in one day | Obsessive? Perhaps |
-| 󰗇 **Lucky Seven** | Check when exactly 77°F | The universe winked |
-| 󰎈 **Noir Night** | Rainy night check | Somewhere a saxophone plays |
-| 󱂵 **Vault Dweller** | Check during severe weather warning | Smart and safe |
-| 󰧗 **Weekend Warrior** | Check every weekend for a month | Weekends deserve weather |
-
-### Why Achievements?
-
-Because checking the weather should feel like an adventure. Stormy notices your dedication and rewards persistence, curiosity, and questionable sleep schedules.
+| Achievement | Trigger |
+|-------------|---------|
+| 󰈙 **The Journey Begins** | First weather check |
+| 󰖗 **Walks in Rain** | 10 rainy days |
+| 󰖘 **Winter's Herald** | Check during snow |
+| 󰖓 **Voice of Thunder** | Check during thunderstorm |
+| 󰖔 **Walker of Night** | Check between midnight-5 AM |
+| 󰖙 **Dawn Watcher** | Check between 5-6 AM |
+| 󰈸 **Forged in Fire** | 100°F+ |
+| 󰖎 **Heart of Winter** | Below 0°F |
+| 󰖑 **Mist Walker** | Check during fog |
+| 󰃭 **The Dedicated** | 7-day streak |
+| 󰆥 **Century Club** | 100 total checks |
+| 󰖌 **Humidity Hero** | Humidity > 90% |
+| 󰖝 **Wind Warrior** | 30+ mph winds |
+| 󰖙 **Goldilocks** | 72°F, clear, low humidity |
+| 󰽥 **Midnight Oracle** | Check at stroke of midnight |
+| 󰥔 **Marathon Watcher** | 10 checks in one day |
+| 󰗇 **Lucky Seven** | Exactly 77°F |
+| 󰎈 **Noir Night** | Rainy night |
+| 󱂵 **Vault Dweller** | Severe weather, safely inside |
+| 󰧗 **Weekend Warrior** | Every weekend for a month |
 
 ---
 
@@ -229,136 +146,106 @@ Because checking the weather should feel like an adventure. Stormy notices your 
 
 ```
 oracle-weather/
-├── weather_dashboard.py   # Main dashboard with Stormy AI personality
-├── weather_live_pro.py    # Pro version with enhanced effects
-├── main.py                # Demo title screen
-├── config.py              # API key loader
-├── config_manager.py      # YAML configuration management
-├── config.example.yaml    # Example config (copy to config.yaml)
-├── requirements.txt       # Python dependencies
+├── weather_dashboard.py    # Main app (1830 lines)
+├── config.py               # API key + location (gitignored)
+├── pyproject.toml           # Package config, `stormy` CLI entry point
+├── requirements.txt         # Python dependencies
+├── pytest.ini               # Test configuration
 │
-├── engine/                # Professional-grade modular engine
-│   ├── __init__.py        # Engine exports
+├── data/                    # Dialogue + art data (extracted from monolith)
+│   ├── dialogue.py          # 151 weather comments, 50 quips, greetings, achievements
+│   └── art.py               # BIG_DIGITS, WEATHER_MASCOT, WEATHER_SCENES
+│
+├── screens/                 # Standalone UI screens
+│   ├── achievements.py      # Hall of Fame
+│   ├── search.py            # Location search
+│   └── bestiary.py          # Creature collection
+│
+├── engine/                  # Modular engine
 │   ├── physics/
-│   │   ├── __init__.py
-│   │   ├── noise.py       # Perlin, Simplex, Fractal, DomainWarp
-│   │   ├── particles.py   # Vector2, ParticleSystem, Forces
-│   │   └── atmosphere.py  # AtmosphericModel, stability, wind chill
+│   │   ├── noise.py         # Perlin, Simplex, Fractal, DomainWarp
+│   │   ├── particles.py     # Vector2, ParticleSystem, Forces
+│   │   └── atmosphere.py    # AtmosphericModel, stability, wind chill
 │   ├── rendering/
-│   │   ├── __init__.py
-│   │   └── core.py        # RenderStats, FrameBudget, RenderQueue
+│   │   └── core.py          # RenderStats, FrameBudget, RenderQueue
 │   ├── personality/
-│   │   ├── __init__.py
-│   │   └── core.py        # PersonalityEngine, MoodStateMachine
+│   │   └── core.py          # PersonalityEngine, MoodStateMachine, Memory
 │   ├── effects/
-│   │   ├── __init__.py
-│   │   └── special_effects.py  # Aurora, rainbow, fog, heat shimmer
+│   │   └── special_effects.py  # Aurora, rainbow, shimmer, frost
 │   └── creatures/
-│       ├── __init__.py
-│       └── core.py        # CreatureManager, 11 weather creatures
+│       └── core.py          # CreatureManager, 25 creatures
 │
-├── lib/                   # Shared utilities
-│   ├── __init__.py
-│   ├── weather_api.py     # OpenWeatherMap + OpenMeteo client
-│   ├── weather_extended.py # Forecasts, alerts, astronomical data
-│   ├── achievements.py    # Achievement system
-│   ├── interactive.py     # Input handling, notifications
-│   ├── dashboard_panels.py # UI panel components
-│   └── particles.py       # Legacy particle physics
+├── lib/                     # Shared utilities
+│   ├── weather_api.py       # OWM + OpenMeteo client, WeatherCondition enum
+│   ├── weather_extended.py  # Forecasts, alerts, WeatherDatabase (SQLite)
+│   ├── sparkline.py         # Block-character sparkline renderer
+│   ├── achievements.py      # Achievement system with tiers
+│   ├── interactive.py       # Input handling, notifications
+│   ├── dashboard_panels.py  # ForecastPanel, AlertBanner, etc.
+│   ├── particles.py         # Legacy particle system (still used)
+│   └── mock_weather.py      # Demo mode data
 │
-└── tests/
-    ├── test_engine.py     # Engine unit tests
-    └── test_extended.py   # Extended features tests
-```
-
----
-## 󰒓 Configuration
-
-### config.yaml (Recommended)
-```yaml
-# API Configuration
-api:
-  openweathermap_key: "your_api_key"
-  
-# Location
-location:
-  city_id: "4597040"
-  latitude: 32.4840
-  longitude: -80.1756
-  
-# Display Settings
-display:
-  units: imperial  # or metric
-  theme: default
-```
-
-### Environment Variables (Alternative)
-```bash
-export OPENWEATHERMAP_API_KEY="your_api_key"
-export WEATHER_CITY_ID="4597040"
+├── tests/
+│   ├── test_engine.py       # Engine unit tests (37 tests)
+│   └── test_extended.py     # Extended features tests (38 tests)
+│
+└── assets/
+    └── demo.gif             # Terminal recording
 ```
 
 ---
 
 ## 󰈈 Engine Architecture
 
-### Physics Engine (`engine/physics/`)
-
-#### Noise Generation
+### Physics (`engine/physics/`)
 ```python
-from engine.physics.noise import PerlinNoise, SimplexNoise, FractalNoise, DomainWarp
+from engine.physics.noise import PerlinNoise, FractalNoise, DomainWarp
 
 noise = PerlinNoise(seed=42)
-value = noise.sample(x, y)  # Ken Perlin's quintic interpolation
+value = noise.sample(x, y)  # Quintic interpolation
 
-# Domain warping for swirling cloud effects
+# Domain warping for swirling clouds
 warp = DomainWarp(FractalNoise(), warp_strength=4.0)
-organic_value = warp.sample(x, y)
+organic = warp.sample(x, y)
 ```
 
-#### Particle Physics
 ```python
 from engine.physics.particles import ParticleSystem, GravityForce, DragForce, WindForce
 
 system = ParticleSystem(max_particles=1000)
 system.add_force_generator(GravityForce(9.81))
 system.add_force_generator(DragForce(0.47))
-system.add_force_generator(WindForce(wind_x=2.0, wind_y=0.0))
-system.update(dt=0.016)  # Euler/Verlet/RK4 integration
+system.add_force_generator(WindForce(wind_x=2.0))
+system.update(dt=0.016)
 ```
 
-#### Atmospheric Model
+### Personality (`engine/personality/`)
 ```python
-from engine.physics.atmosphere import AtmosphericModel, AtmosphericState
-
-state = AtmosphericState(
-    temperature_c=15.0,
-    pressure_hpa=1013.25,
-    humidity_percent=65.0,
-    wind_speed_ms=5.0
-)
-model = AtmosphericModel(state)
-
-# Barometric formula: P(h) = P0 x exp(-Mgh/RT)
-pressure_at_1km = model.pressure_at_altitude(1000)
-
-# Pasquill-Gifford stability classification
-stability = model.classify_stability()  # A (very unstable) to F (stable)
-```
-
-### Personality Engine (`engine/personality/`)
-```python
-from engine.personality.core import PersonalityEngine, Mood
+from engine.personality.core import PersonalityEngine
 
 engine = PersonalityEngine()
-
-# Mood state machine transitions based on weather
 engine.update(weather_type="storm")
-print(engine.current_mood)  # Mood.PHILOSOPHICAL, DEADPAN, SARDONIC, etc.
 
-# Weather-aware dialogue
+# 151 weather comments across all conditions, no dead code
 comment = engine.get_weather_comment("thunderstorm")
-# "The storm rages. There is wisdom in chaos. Also danger. Mostly danger."
+# "Thunder rolled like a landlord demanding rent. Lightning cracked the sky's alibi."
+
+greeting = engine.get_greeting()
+# "Night owl, are we? The moon sees you. It judges nothing. I judge slightly."
+
+quip = engine.get_quip()
+# "That lightning? Fractal branching via recursive pathfinding. Zeus was doing it wrong."
+```
+
+### Sparklines (`lib/sparkline.py`)
+```python
+from lib.sparkline import sparkline, sparkline_with_range
+
+print(sparkline([55, 58, 62, 71, 78, 82, 79, 72, 65]))
+# ▁▁▂▅▆█▇▅▃
+
+print(sparkline_with_range([55, 82, 79, 65], "Temp", width=10))
+# Temp ▁█▇▃ 55-82
 ```
 
 ---
@@ -366,72 +253,53 @@ comment = engine.get_weather_comment("thunderstorm")
 ## 󰙨 Testing
 
 ```bash
-# Run all tests
-python -m pytest tests/ -v
+# Run all 75 tests
+.venv/bin/python -m pytest tests/ -v
 
-# Run engine tests only
-python -m pytest tests/test_engine.py -v
+# Engine tests only
+.venv/bin/python -m pytest tests/test_engine.py -v
 
-# Quick verification
-python -c "from engine import *; print('All engines OK')"
-
-# Test with coverage
-python -m pytest tests/ --cov=engine --cov-report=term-missing
+# With coverage
+.venv/bin/python -m pytest tests/ --cov=engine --cov-report=term-missing
 ```
 
 ---
 
 ## 󰋗 Troubleshooting
 
-### Common Issues
-
-| Issue | Solution |
-|-------|----------|
-| `ModuleNotFoundError: asciimatics` | Run `pip install -r requirements.txt` |
-| API key error | Check `config.py` or `config.yaml` for valid key |
-| Terminal too small | Resize to at least 80x24 |
-| Colors not showing | Use a modern terminal (Kitty, Alacritty, iTerm2) |
-| Weather not updating | Check internet connection, API rate limits |
-
-### Quick Fixes
-```bash
-# Reinstall dependencies
-pip install --force-reinstall -r requirements.txt
-
-# Clear weather cache
-rm -f ~/.cache/oracle-weather/*
-
-# Test API connection
-curl "https://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_KEY"
-```
-
----
-
-
-## 󰋚 Changelog
-
-See [CHANGELOG.md](CHANGELOG.md) for full version history.
-
-**Latest: v2.2.0 - Noir Weather Oracle personality overhaul
+| Issue | Fix |
+|-------|-----|
+| `ModuleNotFoundError` | `pip install -r requirements.txt` |
+| API key error | Create `config.py` with your key (see Quick Start) |
+| Terminal too small | Resize to 120x40+ (80x24 minimum) |
+| Colors missing | Use Kitty, Alacritty, or iTerm2 |
+| Stale venv | `rm -rf .venv && python3 -m venv .venv && pip install -r requirements.txt` |
 
 ---
 
 ## 󱘖 Integration
 
-### Waybar (Hyprland/Sway)
-Add to your Waybar weather module:
-```json
-"custom/weather": {
-    "on-click-right": "kitty -e bash -c 'cd ~/oracle-weather && source .venv/bin/activate && python weather_dashboard.py'"
+### Quickshell / Waybar (Hyprland)
+```qml
+// Right-click weather widget to launch
+Process {
+    command: ["kitty", "-e", "bash", "-c",
+        "cd ~/projects/oracle-weather && source .venv/bin/activate && python weather_dashboard.py"]
 }
 ```
 
-### Shell Aliases
-Add to `~/.zshrc` or `~/.bashrc`:
+### Shell Alias
 ```bash
-alias weather='cd ~/oracle-weather && source .venv/bin/activate && python weather_dashboard.py'
-alias weather_live='cd ~/oracle-weather && source .venv/bin/activate && python weather_live.py'
+alias weather='cd ~/projects/oracle-weather && source .venv/bin/activate && python weather_dashboard.py'
 ```
+
+---
+
+## 󰋚 Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for full version history.
+
+**Latest: v3.0.0** - Unified personality, modular architecture, sparklines, bestiary, smooth transitions
 
 ---
 
@@ -444,8 +312,8 @@ MIT License - See [LICENSE](LICENSE) for details.
 ## 󱗗 Credits
 
 - **asciimatics** - Terminal animation framework
-- **OpenWeatherMap** - Weather data API
-- **OpenMeteo** - Backup weather API
+- **OpenWeatherMap** - Primary weather API
+- **OpenMeteo** - Fallback weather API
 
 ---
 

@@ -10,9 +10,6 @@ from enum import Enum
 from typing import Optional
 import requests
 
-# Import config
-import sys
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config import (
     OPENWEATHERMAP_API_KEY, OPENWEATHERMAP_CITY_ID,
     LATITUDE, LONGITUDE, TIMEZONE, LOCATION_NAME,

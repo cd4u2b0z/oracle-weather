@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-⚡ STORMY - Weather Oracle of the Terminal (Enhanced Edition)
+STORMY - Weather Oracle of the Terminal (Enhanced Edition)
 "The sky speaks. I merely translate. With commentary. And now, forecasts."
 
 A philosophical weather dashboard with the wisdom of ages,
@@ -45,7 +45,7 @@ DEMO_MODE = False
 DEMO_SCENARIO = None
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# 🆕 ENHANCED MODULES - New integrated features
+# ENHANCED MODULES - New integrated features
 # ═══════════════════════════════════════════════════════════════════════════════
 try:
     from lib.weather_extended import (
@@ -101,7 +101,7 @@ except ImportError:
     SPECIAL_EFFECTS_AVAILABLE = False
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# 🧠 PROFESSIONAL WEATHER ENGINE - Modular Architecture
+# PROFESSIONAL WEATHER ENGINE - Modular Architecture
 # ═══════════════════════════════════════════════════════════════════════════════
 from engine.physics.noise import PerlinNoise as EnginePerlinNoise, FractalNoise, SimplexNoise, DomainWarp
 from engine.physics.particles import (
@@ -114,6 +114,14 @@ from engine.physics.atmosphere import (
 )
 from engine.rendering.core import RenderStats, FrameBudget, RenderQueue, RenderCommand, RenderLayer
 from engine.personality.core import PersonalityEngine, Mood, PersonalityConfig
+from data.dialogue import (
+    WEATHER_COMMENTS as DIALOGUE_COMMENTS, TEMP_COMMENTS, GREETINGS,
+    ACHIEVEMENTS as DIALOGUE_ACHIEVEMENTS, QUIPS, WEATHER_TYPE_MAP, get_temp_category,
+)
+from data.art import BIG_DIGITS, WEATHER_MASCOT, STORMY_FACES, WEATHER_SCENES
+from screens.achievements import draw_achievements_screen
+from screens.search import location_search_screen
+from screens.bestiary import draw_bestiary_screen
 
 # Global performance monitoring
 _render_stats = RenderStats()
@@ -121,7 +129,7 @@ _frame_budget = FrameBudget(target_fps=30)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# 🧠 ADVANCED PHYSICS ENGINE - "Under the hood complexity"
+# ADVANCED PHYSICS ENGINE - "Under the hood complexity"
 # ═══════════════════════════════════════════════════════════════════════════════
 
 # Physics constants (Stormy takes physics seriously, even if sarcastically)
@@ -370,7 +378,7 @@ class PhysicsParticle:
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# 🎨 THEME & COLORS
+# THEME & COLORS
 # ═══════════════════════════════════════════════════════════════════════════════
 
 class Theme:
@@ -389,418 +397,24 @@ class Theme:
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# 🎷 STORMY - NOIR WEATHER ORACLE
+# STORMY - Thin wrapper around PersonalityEngine + persistence
 # ═══════════════════════════════════════════════════════════════════════════════
 # Inspired by: Carrot Weather, Fallout, Elder Scrolls, Monty Python
 # Musical mood: The Ink Spots, Frank Sinatra, Bing Crosby, The Mills Brothers
 # "I don't want to set the world on fire... I just want to tell you it's raining."
 
 class StormyPersonality:
-    """
-    A weather oracle from another time—equal parts noir detective,
-    Wasteland survivor, mystical prophet, jazz crooner, and absurdist philosopher.
-    
-    The sky has stories to tell. I translate.
-    """
-    
-    MOODS = ["noir", "wasteland", "prophet", "crooner", "absurdist", "philosophical"]
-    
-    # ═══════════════════════════════════════════════════════════════════════════
-    # WEATHER COMMENTS - Organized by mood/style, then condition
-    # ═══════════════════════════════════════════════════════════════════════════
-    
-    COMMENTS = {
-        # ─────────────────────────────────────────────────────────────────────────
-        # CLEAR SKIES
-        # ─────────────────────────────────────────────────────────────────────────
-        WeatherCondition.CLEAR: [
-            # Noir
-            "The sun hung in the sky like a burnt-out bulb nobody bothered to change. Clear skies. Too clear. Made a man nervous.",
-            "Blue sky from here to yesterday. The kind of day that makes you forget rain exists. That's when it gets you.",
-            "Not a cloud in the sky. Somewhere, a saxophone was playing. Somewhere else, trouble was brewing.",
-            "The dame upstairs—Mother Nature—was in a good mood. Clear skies. Don't get used to it, pal.",
-            # Wasteland
-            "Clear skies! Vault-Tec reminds you: surface conditions are temporarily non-lethal. Enjoy responsibly!",
-            "Blue sky. Almost makes you forget about the... well, best not to dwell. Lovely day for scavenging!",
-            "The sun is out and radiation levels are only SLIGHTLY elevated. We call this a win!",
-            "Beautiful day! The kind that makes you wish for a nuclear winter. Wait—",
-            # Prophet
-            "The Scrolls spoke of this day—when Aetherius would shine upon Mundus unobstructed. Lo, clear skies.",
-            "Magnus withdraws not his gaze today. The sun watches. The sun judges. Bring water.",
-            "By the Nine! The sky reveals itself in full splendor. An omen? Perhaps. Of what? Unclear.",
-            # Crooner
-            "♪ Blue skies, smilin' at me... Nothing but blue skies, do I see... ♪ Sinatra knew.",
-            "What a day! The kind where Bing would croon and the Andrews Sisters would harmonize.",
-            "Clear skies, friend. 'I've got the world on a string...' That's today.",
-            # Absurdist
-            "Lovely day! Your quest for the Holy Grail can proceed. Mind the rabbit.",
-            "'And now for something completely different... sunshine.' Monty Python's Flying Weather.",
-            "'What is the airspeed velocity of an unladen swallow?' African or European? Anyway, clear skies.",
-        ],
-        
-        # ─────────────────────────────────────────────────────────────────────────
-        # PARTLY CLOUDY
-        # ─────────────────────────────────────────────────────────────────────────
-        WeatherCondition.PARTLY_CLOUDY: [
-            "Clouds drifted across the sun like alibis at a crime scene—half-truths casting shadows.",
-            "Partly cloudy. The sky couldn't commit. I knew the type. Weather like a two-timing dame.",
-            "Some clouds, some sun. The sky's playing both sides. We call that 'hedging your bets.'",
-            "The clouds came and went like witnesses who suddenly remembered they had somewhere else to be.",
-            "Partly cloudy. The universe remains noncommittal on your plans. Standard procedure.",
-            "Half sun, half cloud. The sky's having an identity crisis. Relatable.",
-        ],
-        
-        # ─────────────────────────────────────────────────────────────────────────
-        # CLOUDY
-        # ─────────────────────────────────────────────────────────────────────────
-        WeatherCondition.CLOUDY: [
-            # Noir
-            "Grey. Grey like the faces of men who'd seen too much and forgot why they started looking.",
-            "Overcast. The sky had pulled down its hat and wasn't talking. I knew the feeling.",
-            "Clouds rolled in thick as cigarette smoke in a speakeasy. The sun was gone. Nobody saw nothing.",
-            "Grey skies. The color of broken promises and cold coffee. My kind of weather.",
-            # Wasteland
-            "Overcast. Good news: lower radiation exposure. Bad news: harder to spot raiders.",
-            "Grey skies. Reminds me of the old Vault ceiling. Almost homey. Almost.",
-            "Cloudy with a chance of existential dread. Standard Wasteland conditions.",
-            # Prophet
-            "The veil of Oblivion draws close to Nirn today. Grey clouds gather. The Princes watch.",
-            "Overcast. Azura's star hides behind the grey. The twilight goddess plays coy.",
-            # Crooner
-            "Overcast. ♪ Grey skies are gonna clear up, put on a happy face... ♪ Eventually.",
-            "Clouds gathering. Reminds me of that Mills Brothers tune... the melancholy one.",
-            # Absurdist
-            "Overcast. 'Always look on the bright side of—' Actually, there isn't one. Whistle anyway.",
-            "'Bring me a SHRUBBERY!' demands the sky. It delivers clouds instead. Ni!",
-        ],
-        
-        # ─────────────────────────────────────────────────────────────────────────
-        # RAIN
-        # ─────────────────────────────────────────────────────────────────────────
-        WeatherCondition.RAIN: [
-            # Noir
-            "Rain. It always rains in this town. Washes away the evidence but never the guilt.",
-            "The rain came down like questions at a murder trial—hard, fast, and no good answers.",
-            "Raining. Streets turned to mirrors, reflecting a city that didn't want to see itself.",
-            "Drops hit the window like regrets knocking. Rain, they call it. I call it atmosphere.",
-            "The sky opened up. The dame upstairs was crying again. Couldn't blame her.",
-            # Wasteland
-            "Rain! Remember: most of it is PROBABLY not radioactive anymore. Probably.",
-            "Precipitation detected. Pip-Boy advises: seek shelter unless you enjoy glowing.",
-            "It's raining. Pre-war books call this 'weather.' We call this 'free water day.'",
-            # Prophet
-            "The tears of Kyne fall upon the land! She weeps for Shor, or perhaps just Tuesdays.",
-            "Rain descends from the heavens. The Hist stirs. The earth drinks. Sacred cycle.",
-            "Kyne's breath carries the gift of rain. Praise the Divine Mother. Bring an umbrella.",
-            # Crooner
-            "♪ Into each life, some rain must fall... ♪ The Ink Spots knew. They always knew.",
-            "♪ I'm singin' in the rain... ♪ Or staying inside. Both valid choices.",
-            "Raindrops keep falling, as Burt would say. Keep your head on straight.",
-            # Absurdist
-            "Rain! 'I'm not dead yet!' cried the flowers. 'I'm getting better!' More rain coming.",
-            "'Tis but a drizzle! A mere flesh wound of precipitation! ...Alright, it's raining.",
-            "'Strange women lying in ponds distributing swords is no basis for government.' Nor is rain forecasting.",
-        ],
-        
-        # ─────────────────────────────────────────────────────────────────────────
-        # HEAVY RAIN
-        # ─────────────────────────────────────────────────────────────────────────
-        WeatherCondition.HEAVY_RAIN: [
-            "Rain came down in sheets—the kind that makes you believe in the Flood.",
-            "Torrential. Like the sky had debts to pay and was making good all at once.",
-            "Heavy rain. Turns the world into a watercolor painted by someone with a grudge.",
-            "The deluge. Streets became rivers. Rivers became problems. Problems became my Tuesday.",
-            "HEAVY RAIN WARNING. Vault-Tec suggests: remain indoors, conserve ammo, hum cheerfully.",
-            "Deluge conditions. Good day to organize your bottlecaps and contemplate mortality.",
-            "HEAVY RAIN. Like the tears of Talos himself. Dramatic, really.",
-            "The heavens open. Cleansing or inconvenient? Often both.",
-        ],
-        
-        # ─────────────────────────────────────────────────────────────────────────
-        # DRIZZLE
-        # ─────────────────────────────────────────────────────────────────────────
-        WeatherCondition.DRIZZLE: [
-            "Drizzle. Not quite rain. The weather's way of being passive-aggressive.",
-            "A light mist. Just enough to ruin a hat and dampen a mood. Typical.",
-            "Drizzling. The kind of wet that sneaks up on you. Like truth. Like trouble.",
-            "Misting. The weather equivalent of 'I'm fine.' It's not fine. It's damp.",
-        ],
-        
-        # ─────────────────────────────────────────────────────────────────────────
-        # THUNDERSTORM
-        # ─────────────────────────────────────────────────────────────────────────
-        WeatherCondition.THUNDERSTORM: [
-            # Noir
-            "Thunder rolled like a landlord demanding rent. Lightning cracked the sky's alibi.",
-            "Storm came in angry—the kind of angry that breaks things and doesn't apologize.",
-            "Lightning lit up the sky like a flashbulb at a crime scene. Momentary visibility. Then dark.",
-            "The storm had an attitude. Thunder like a threat. Lightning like a warning.",
-            "Electric night. The sky was arguing with itself. Big bolts of 'I told you so.'",
-            # Wasteland
-            "ELECTRICAL STORM. Natural, not nuclear! A rare treat. Observe with wonder and mild terror.",
-            "Thunder and lightning! Nature's fireworks. Still safer than Megaton, statistically.",
-            "Storm rolling in. The Old World had umbrellas. We have reinforced bunkers. Progress!",
-            # Prophet
-            "THUNDER OF THE GODS! Talos himself speaks! Or—perhaps it's merely weather.",
-            "Storm-rage! The voice of Kyne and Kynareth as one! The Divines debate fiercely!",
-            "Lightning splits the sky! For a moment, Aetherius is visible. Magnificent. Terrifying.",
-            "The Storm has come! As the Greybeards meditate, so too does the sky SPEAK.",
-            # Crooner
-            "♪ Summer storm... ♪ Thunder rolls like timpani. Nature's orchestra tonight.",
-            "Storm's here. Ella would still sound beautiful over this thunder. Artistry defies weather.",
-            # Absurdist
-            "THUNDERSTORM! 'Run away! Run away!' The Knights had the right idea.",
-            "Storm! 'We are the knights who say... BOOM!' Lightning agrees enthusiastically.",
-            "Thunder and lightning! 'Bring out your dead!' weather. Stay inside.",
-        ],
-        
-        # ─────────────────────────────────────────────────────────────────────────
-        # SNOW
-        # ─────────────────────────────────────────────────────────────────────────
-        WeatherCondition.SNOW: [
-            # Noir
-            "Snow fell like forgotten letters—white, cold, piling up with nobody to read them.",
-            "The white stuff came down slow and quiet. Like a secret everybody knew but nobody mentioned.",
-            "Snow. Made the city look clean. Covered up the dirt. That's the problem with snow.",
-            "Flakes drifted down like memories of better days. Cold comfort. The only kind this town serves.",
-            # Wasteland
-            "Snow! Patrolling the Mojave makes you wish—wait, wrong region. Still. Snow!",
-            "Nuclear winter finally arrived! Oh wait, just regular winter. Less exciting.",
-            "Frozen precipitation. The Wasteland's way of saying stay inside. Listen to it.",
-            # Prophet
-            "Snow! Skyrim's ancient gift. Embrace the cold, Son of the North!",
-            "The frozen tears of Kyne descend. Winter's mantle spreads. Y'ffre weeps icicles.",
-            "Snow falls. The Nords rejoice. Everyone else considers relocation.",
-            # Crooner
-            "♪ Let it snow, let it snow, let it snow... ♪ Dean Martin knew. Get cozy.",
-            "Snow falling. ♪ I'm dreaming of a white... ♪ You know the rest. Bing knew best.",
-            "Snowflakes falling like notes from a melancholy ballad. Mills Brothers weather.",
-            # Absurdist
-            "Snow! 'It's just a model.' 'Shh!' Camelot looks lovely. 'Tis a silly place.",
-            "'We are the Knights who say NI! And also... SNOW!' Bundle up.",
-            "Snowing. 'I fart in your general direction!' says the sky. French weather front.",
-        ],
-        
-        # ─────────────────────────────────────────────────────────────────────────
-        # HEAVY SNOW
-        # ─────────────────────────────────────────────────────────────────────────
-        WeatherCondition.HEAVY_SNOW: [
-            "HEAVY SNOW. The Greybeards have SHOUTED and they're not happy.",
-            "Blizzard conditions. This is fine. Everything is fine.",
-            "Snow piles high. Much like my responsibilities. Both are ignored.",
-            "Heavy snow. Somewhere, a courier is having a VERY bad day.",
-            "The white death descends. Overdramatic? Perhaps. Accurate? Also yes.",
-        ],
-        
-        # ─────────────────────────────────────────────────────────────────────────
-        # FOG
-        # ─────────────────────────────────────────────────────────────────────────
-        WeatherCondition.FOG: [
-            # Noir
-            "Fog rolled in thick enough to hide a body. Or a secret. This town had both.",
-            "Couldn't see past your nose. The fog had opinions about visibility. All negative.",
-            "Mist turned the world into a guessing game. Shapes in the grey. Could be anything.",
-            "The fog came. Swallowed the street whole. Can't see what's coming. Today was one of those days.",
-            # Wasteland
-            "Heavy fog. Visibility compromised. Perfect ambush conditions. Stay frosty, Wastelander.",
-            "Fog rolled in. Can't see hostiles. Hostiles can't see you. Surprise Christmas!",
-            "Mist everywhere. The Commonwealth's special gift. I don't remember ordering atmosphere.",
-            # Prophet
-            "The veil thins. Fog rolls like the breath of Sithis himself. Walk carefully.",
-            "Mist obscures the path. As in prophecy, so in weather: the way forward is unclear.",
-            "Fog blankets the realm. The Hist whispers through the grey. Listen. Or get lost.",
-            "The world fades to grey. Perhaps Hermaeus Mora stirs. Or just humidity.",
-            # Crooner
-            "♪ A foggy day, in London town... ♪ Or wherever you are. Gershwin gets it.",
-            "Fog rolling in. ♪ As time goes by... ♪ You can barely see it going. Romantic.",
-            # Absurdist
-            "Fog! 'I didn't expect a kind of Spanish Inquisition.' NOBODY expects fog!",
-            "Visibility: none. 'It's only a model!' 'Of what?' 'Can't tell. There's fog.'",
-        ],
-        
-        # ─────────────────────────────────────────────────────────────────────────
-        # FREEZING RAIN
-        # ─────────────────────────────────────────────────────────────────────────
-        WeatherCondition.FREEZING_RAIN: [
-            "Freezing rain. The worst of both elements. A compromise pleasing no one.",
-            "Ice falls from the sky. The Wasteland sends its regards.",
-            "Freezing rain. Trust nothing. Especially the ground.",
-            "Winter's worst trick: rain that turns to ice. Nature's malice made physical.",
-        ],
-    }
-    
-    # ═══════════════════════════════════════════════════════════════════════════
-    # TEMPERATURE COMMENTS - Noir style with variety
-    # ═══════════════════════════════════════════════════════════════════════════
-    TEMP_COMMENTS = {
-        "freezing": [  # Below 20°F
-            "Cold enough to freeze the truth out of a liar. Bundle up, sweetheart.",
-            "Temperature dropped like a stool pigeon from a tenth-floor window. Stay warm.",
-            "The kind of cold that makes a man philosophical. Or dead. Don't be dead.",
-            "Freezing. Even the mammoths stayed home in this.",
-            "This cold teaches humility. And frostbite. Mostly frostbite.",
-        ],
-        "cold": [  # 20-40°F
-            "Brisk. The kind of weather that wakes you up. Whether you wanted waking is another matter.",
-            "Cold. Collar up, keep moving. This city doesn't reward standing still.",
-            "Chill in the air. Makes coffee taste better. Makes everything else taste like survival.",
-            "Cold enough to see your breath. Your spirit made visible. Briefly.",
-            "Brisk. The Nords call this 'refreshing.' The Nords are insane.",
-        ],
-        "cool": [  # 40-60°F
-            "Cool and comfortable. Suspicious. Weather this nice usually means something's wrong.",
-            "Pleasant temperature. Don't get used to it. Nothing good stays in this town.",
-            "Cool air. The earth breathes easy. A fine day for a quest. Or tea.",
-            "Temperate. The Goldilocks zone. Not too hot. Not too cold. Merely existing.",
-        ],
-        "mild": [  # 60-75°F
-            "Mild. The temperature equivalent of 'no comment.' I respect its refusal to commit.",
-            "Room temperature. Outside. The universe is feeling neutral. Won't last.",
-            "Neither hot nor cold. The temperature equivalent of 'no strong opinions.'",
-            "Mild. The weather has achieved neutrality. Remarkable.",
-        ],
-        "warm": [  # 75-90°F
-            "Getting warm. Like an interrogation room after the third hour. Drink water.",
-            "Warm. The heat makes people do stupid things. Stay hydrated. Stay smart.",
-            "Warm. The sun reminds you it exists. Aggressively.",
-            "Toasty. The desert wanderer in you awakens. The rest of you sweats.",
-        ],
-        "hot": [  # Above 90°F
-            "Hot. Hotter than a two-dollar pistol. The kind of heat that melts alibis.",
-            "Scorching. The sun's got questions and it's asking them real loud.",
-            "Heat like a lie that's about to unravel. Find shade. Find water. Find wisdom.",
-            "HOT. The sun is angry. What did you do? WHAT DID YOU DO.",
-            "Temperature: punishing. Carry water. Question your choices.",
-        ],
-    }
-    
-    # ═══════════════════════════════════════════════════════════════════════════
-    # TIME-BASED GREETINGS
-    # ═══════════════════════════════════════════════════════════════════════════
-    GREETINGS = {
-        "morning": [
-            "Morning, pal. The city wakes up ugly and stays that way. Coffee helps.",
-            "Dawn. The sun clocks in for another shift. So do we.",
-            "Good morning! Another day survived! That's cause for celebration!",
-            "Rise and shine! Surface conditions await your evaluation!",
-            "♪ Oh what a beautiful morning... ♪ Let's see if the weather agrees.",
-            "Morning, friend. The Mills Brothers sang about mornings like this.",
-            "Morning! The sun has risen! 'Tis not dead yet!",
-            "Good morning! Your quest begins anew! Mind the weather. And the rabbit.",
-        ],
-        "afternoon": [
-            "Afternoon. The day's half gone. The weather hasn't changed its story.",
-            "High noon came and went. Now we're in the long shadow of afternoon.",
-            "Afternoon! Peak radiation hours! Please stand by.",
-            "Afternoon. ♪ In the cool, cool, cool of the evening... ♪ Not yet. But soon.",
-            "Afternoon! 'What is the quest?' 'To check weather.' 'What is your favorite color?'",
-            "The sun is high. Your energy is not. This is the way of things.",
-        ],
-        "evening": [
-            "Evening. The shadows get long and honest. Good time for reflection.",
-            "Dusk. The city changes shifts. The night crew's coming on.",
-            "Evening falls. ♪ In the wee small hours... ♪ Not quite, but soon.",
-            "Evening! The Wasteland settles into its nightly routine of mild existential dread!",
-            "Evening approaches! The Knights retire to Camelot! 'Tis a silly place, but warm.",
-            "Dusk approaches. A fine time for reflection. Or dinner. Both, perhaps.",
-        ],
-        "night": [
-            "Night. Honest people sleep. The rest of us check weather apps. Don't judge.",
-            "The dark hours. Either you're up for a reason, or you ARE the reason.",
-            "Night, Wastelander. The Wasteland doesn't sleep. Neither, apparently, do you.",
-            "♪ Fly me to the moon... ♪ It's out there. So's the weather. Both judging you.",
-            "Night! 'Now go away, or I shall taunt you a second time!' The moon has spoken.",
-            "Night owl, are we? The moon sees you. It judges nothing. I judge slightly.",
-        ],
-    }
-    
-    # ═══════════════════════════════════════════════════════════════════════════
-    # ACHIEVEMENTS - Now with Nerd Font glyphs and human descriptions
-    # ═══════════════════════════════════════════════════════════════════════════
-    ACHIEVEMENTS = {
-        # Original achievements - now with Nerd Font glyphs
-        "first_check": ("󰈙 The Journey Begins", "You asked about the weather for the first time. The sky took notice."),
-        "rain_lover": ("󰖗 Walks in Rain", "Ten rainy days and counting. The clouds know your face by now."),
-        "snow_day": ("󰖘 Winter's Herald", "You braved the frozen sky and lived to tell about it."),
-        "storm_chaser": ("󰖓 Voice of Thunder", "You stared down the storm's fury. The lightning remembers."),
-        "night_owl": ("󰖔 Walker of Night", "Checking weather at 3 AM? Questionable life choices, excellent dedication."),
-        "early_bird": ("󰖙 Dawn Watcher", "You rose before the sun just to ask about it. Poetic, if a bit obsessive."),
-        "temp_extreme_hot": ("󰈸 Forged in Fire", "You survived triple digits. The sun tested you and you passed."),
-        "temp_extreme_cold": ("󰖎 Heart of Winter", "Below zero and still standing. The cold couldn't break you."),
-        "fog_master": ("󰖑 Mist Walker", "You navigated the veil between worlds. Or just drove in fog. Same thing."),
-        "consistent": ("󰃭 The Dedicated", "Seven days straight. The sky appreciates your commitment."),
-        
-        # New achievements
-        "century_club": ("󰆥 Century Club", "One hundred weather checks. You've gone from casual to professional."),
-        "humidity_hero": ("󰖌 Humidity Hero", "You checked when the air was basically soup. Respect."),
-        "wind_warrior": ("󰖝 Wind Warrior", "Thirty mile per hour winds and you still showed up. Brave or foolish? Both."),
-        "perfect_day": ("󰖙 Goldilocks", "72 degrees, clear skies, low humidity. Perfection exists. Briefly."),
-        "midnight_oracle": ("󰽥 Midnight Oracle", "You checked at the stroke of midnight. The veil between days is thin there."),
-        "marathon_watcher": ("󰥔 Marathon Watcher", "Ten checks in one day. Obsessive? Perhaps. Well-informed? Absolutely."),
-        "lucky_seven": ("󰗇 Lucky Seven", "77 degrees exactly. The universe winked at you. Go buy a lottery ticket."),
-        "noir_night": ("󰎈 Noir Night", "Rainy night, checking weather. Somewhere a saxophone plays. Perfect."),
-        "vault_dweller": ("󱂵 Vault Dweller", "Severe weather warning and you're safely inside checking forecasts. Smart."),
-        "weekend_warrior": ("󰧗 Weekend Warrior", "Every weekend for a month. Weekends deserve weather wisdom too."),
-    }
-    # QUIPS - Random wisdom in various styles
-    # ═══════════════════════════════════════════════════════════════════════════
-    QUIPS = [
-        # Noir Detective
-        "The barometer doesn't lie. People do. Trust the instruments.",
-        "In this town, the weather's the only thing that can't be bought. Yet.",
-        "I've seen a lot of forecasts. Most were optimistic. Most were wrong.",
-        "The clouds roll in like trouble—slow at first, then all at once.",
-        "Trust the dew point. It's got nothing to hide.",
-        
-        # Fallout/Wasteland
-        "Vault-Tec Tip: Knowledge is the difference between preparation and irradiation!",
-        "The Wasteland taught me: check the sky before your Pip-Boy. Nature warns first.",
-        "War never changes. Weather always changes. Only one is useful information.",
-        "In the old world, they complained about weather. Now we're just glad there IS weather.",
-        "Patrolling the forecast almost makes you wish for a nuclear winter. Almost.",
-        
-        # Elder Scrolls Prophecy
-        "The Scrolls speak of one who would consult the heavens. Probably you. Lots of Scrolls.",
-        "As the Wheel turns, so turns the weather. Less profound than it sounds.",
-        "The Hist remembers every rainfall. I merely report them.",
-        "By Azura, by Azura, by AZURA! Have you SEEN this forecast?",
-        "Sweet Nerevar, the pressure systems align! Or don't. Prophecies are vague.",
-        
-        # Crooner/Jazz
-        "♪ The weather outside is... something. Come check and find out. ♪",
-        "As Frank said: 'I did it my way.' The weather does it ITS way. We just report.",
-        "The Ink Spots sang about maybe. The weather doesn't do maybe. It does.",
-        "Some days swing. Some days don't. Weather's got its own rhythm.",
-        "Bing dreamed of white Christmases. The forecast grants what it grants.",
-        
-        # Monty Python Absurdist
-        "'Tis but a forecast! Your mother was a hamster and your weather smelled of elderberries!",
-        "Nobody expects the Spanish Inquisition! ALSO nobody expects this weather.",
-        "This forecast has ceased to be! It's expired! It's an EX-FORECAST! Here's a new one.",
-        "We are the Knights who say... CHECK THE WEATHER! Less catchy, but practical.",
-        "'What is your favorite color?' 'Blue! No—grey! AAAAHHH!' *checks clouds*",
-        
-        # Physics/Meta
-        "I render these clouds using Perlin noise. Ken Perlin would approve. Or sue.",
-        "Each raindrop is a physics simulation. I take fake precipitation seriously.",
-        "The barometric pressure contemplates existence. I contemplate back. Circle of life.",
-        "Fun fact: Your weather anxiety is valid. The sky IS unpredictable. Science.",
-        "I've calculated more dew points than you've had hot dinners. This is my burden.",
-        "That lightning? Fractal branching via recursive pathfinding. Zeus was doing it wrong.",
-        "These particles have mass and buoyancy. More than most weather apps can say.",
-        "I calculated 6t⁵ - 15t⁴ + 10t³ to make those clouds smooth. You're welcome.",
-    ]
-    
+    """Thin wrapper: persistence + achievements. All dialogue lives in data/dialogue.py,
+    all mood/memory logic lives in engine/personality/core.py."""
+
+    ACHIEVEMENTS = DIALOGUE_ACHIEVEMENTS
+
     def __init__(self):
-        self.mood = random.choice(self.MOODS)
         self.data_path = Path.home() / ".stormy_data.json"
         self.data = self._load_data()
-        # Use the engine's PersonalityEngine for advanced mood/memory
         self.engine = PersonalityEngine(PersonalityConfig(name="Stormy"))
-        self._use_engine = True
-    
+
     def _load_data(self) -> dict:
-        """Load persistent data for achievements."""
         if self.data_path.exists():
             try:
                 return json.loads(self.data_path.read_text())
@@ -815,95 +429,48 @@ class StormyPersonality:
             "checks_today": 0,
             "weekend_checks": 0,
         }
-    
+
     def _save_data(self):
-        """Save persistent data."""
         try:
             self.data_path.write_text(json.dumps(self.data, indent=2))
         except Exception:
             pass
-    
+
     def get_greeting(self) -> str:
-        hour = datetime.now().hour
-        if 5 <= hour < 12:
-            period = "morning"
-        elif 12 <= hour < 17:
-            period = "afternoon"
-        elif 17 <= hour < 21:
-            period = "evening"
-        else:
-            period = "night"
-        return random.choice(self.GREETINGS[period])
-    
+        return self.engine.get_greeting()
+
     def get_weather_comment(self, weather: WeatherData) -> str:
-        """Get a comment about the current weather."""
-        if self._use_engine:
-            weather_map = {
-                WeatherCondition.CLEAR: "clear",
-                WeatherCondition.PARTLY_CLOUDY: "clear",
-                WeatherCondition.CLOUDY: "clear",
-                WeatherCondition.RAIN: "rain",
-                WeatherCondition.HEAVY_RAIN: "rain",
-                WeatherCondition.DRIZZLE: "rain",
-                WeatherCondition.THUNDERSTORM: "storm",
-                WeatherCondition.SNOW: "snow",
-                WeatherCondition.HEAVY_SNOW: "snow",
-                WeatherCondition.FOG: "fog",
-                WeatherCondition.FREEZING_RAIN: "rain",
-            }
-            weather_type = weather_map.get(weather.condition, "clear")
-            self.engine.update(weather_type)
-            return self.engine.get_weather_comment(weather_type)
-        comments = self.COMMENTS.get(weather.condition, self.COMMENTS[WeatherCondition.CLOUDY])
-        return random.choice(comments)
-    
+        weather_type = WEATHER_TYPE_MAP.get(weather.condition, "clear")
+        self.engine.update(weather_type)
+        return self.engine.get_weather_comment_by_condition(weather.condition)
+
     def get_temp_comment(self, temp_f: float) -> str:
-        """Get a comment based on temperature."""
-        if temp_f < 20:
-            category = "freezing"
-        elif temp_f < 40:
-            category = "cold"
-        elif temp_f < 60:
-            category = "cool"
-        elif temp_f < 75:
-            category = "mild"
-        elif temp_f < 90:
-            category = "warm"
-        else:
-            category = "hot"
-        return random.choice(self.TEMP_COMMENTS[category])
-    
+        return self.engine.get_temp_comment(temp_f)
+
     def check_achievements(self, weather: WeatherData) -> list:
-        """Check and unlock achievements."""
         unlocked = []
         hour = datetime.now().hour
         today = datetime.now().strftime("%Y-%m-%d")
-        
-        # First check
+
         if "first_check" not in self.data["achievements"]:
             self.data["achievements"].append("first_check")
             unlocked.append(self.ACHIEVEMENTS["first_check"])
-        
-        # Update check count
+
         self.data["check_count"] += 1
-        
-        # Century club
+
         if self.data["check_count"] >= 100 and "century_club" not in self.data["achievements"]:
             self.data["achievements"].append("century_club")
             unlocked.append(self.ACHIEVEMENTS["century_club"])
-        
-        # Checks today tracking
+
         if self.data.get("last_check_date") == today:
             self.data["checks_today"] = self.data.get("checks_today", 0) + 1
         else:
             self.data["checks_today"] = 1
-        
-        # Marathon watcher
+
         if self.data["checks_today"] >= 10 and "marathon_watcher" not in self.data["achievements"]:
             self.data["achievements"].append("marathon_watcher")
             unlocked.append(self.ACHIEVEMENTS["marathon_watcher"])
-        
-        # Streak tracking
+
         if self.data["last_check_date"] != today:
             yesterday = (datetime.now().date() - timedelta(days=1)).strftime("%Y-%m-%d")
             if self.data["last_check_date"] == yesterday:
@@ -911,277 +478,96 @@ class StormyPersonality:
             else:
                 self.data["streak"] = 1
             self.data["last_check_date"] = today
-        
-        # Weather-based achievements
+
         if weather.condition == WeatherCondition.THUNDERSTORM and "storm_chaser" not in self.data["achievements"]:
             self.data["achievements"].append("storm_chaser")
             unlocked.append(self.ACHIEVEMENTS["storm_chaser"])
-        
+
         if weather.condition in (WeatherCondition.SNOW, WeatherCondition.HEAVY_SNOW) and "snow_day" not in self.data["achievements"]:
             self.data["achievements"].append("snow_day")
             unlocked.append(self.ACHIEVEMENTS["snow_day"])
-        
+
         if weather.condition == WeatherCondition.FOG and "fog_master" not in self.data["achievements"]:
             self.data["achievements"].append("fog_master")
             unlocked.append(self.ACHIEVEMENTS["fog_master"])
-        
+
         if weather.condition in (WeatherCondition.RAIN, WeatherCondition.HEAVY_RAIN, WeatherCondition.DRIZZLE):
             self.data["rain_days"] += 1
             if self.data["rain_days"] >= 10 and "rain_lover" not in self.data["achievements"]:
                 self.data["achievements"].append("rain_lover")
                 unlocked.append(self.ACHIEVEMENTS["rain_lover"])
-            # Noir night - rainy night
             if hour >= 21 or hour < 5:
                 if "noir_night" not in self.data["achievements"]:
                     self.data["achievements"].append("noir_night")
                     unlocked.append(self.ACHIEVEMENTS["noir_night"])
-        
-        # Time-based achievements
-        if hour >= 0 and hour < 5 and "night_owl" not in self.data["achievements"]:
+
+        if 0 <= hour < 5 and "night_owl" not in self.data["achievements"]:
             self.data["achievements"].append("night_owl")
             unlocked.append(self.ACHIEVEMENTS["night_owl"])
-        
-        if hour >= 5 and hour < 6 and "early_bird" not in self.data["achievements"]:
+
+        if 5 <= hour < 6 and "early_bird" not in self.data["achievements"]:
             self.data["achievements"].append("early_bird")
             unlocked.append(self.ACHIEVEMENTS["early_bird"])
-        
-        # Midnight oracle
+
         if hour == 0 and datetime.now().minute < 5 and "midnight_oracle" not in self.data["achievements"]:
             self.data["achievements"].append("midnight_oracle")
             unlocked.append(self.ACHIEVEMENTS["midnight_oracle"])
-        
-        # Temperature achievements
+
         if weather.temperature_f >= 100 and "temp_extreme_hot" not in self.data["achievements"]:
             self.data["achievements"].append("temp_extreme_hot")
             unlocked.append(self.ACHIEVEMENTS["temp_extreme_hot"])
-        
+
         if weather.temperature_f <= 0 and "temp_extreme_cold" not in self.data["achievements"]:
             self.data["achievements"].append("temp_extreme_cold")
             unlocked.append(self.ACHIEVEMENTS["temp_extreme_cold"])
-        
-        # Lucky seven - 77°F
+
         if 76.5 <= weather.temperature_f <= 77.5 and "lucky_seven" not in self.data["achievements"]:
             self.data["achievements"].append("lucky_seven")
             unlocked.append(self.ACHIEVEMENTS["lucky_seven"])
-        
-        # Perfect day - 72°F, clear, low humidity
-        if (71 <= weather.temperature_f <= 73 and 
+
+        if (71 <= weather.temperature_f <= 73 and
             weather.condition == WeatherCondition.CLEAR and
             getattr(weather, 'humidity', 100) < 60 and
             "perfect_day" not in self.data["achievements"]):
             self.data["achievements"].append("perfect_day")
             unlocked.append(self.ACHIEVEMENTS["perfect_day"])
-        
-        # Humidity hero
+
         if getattr(weather, 'humidity', 0) > 90 and "humidity_hero" not in self.data["achievements"]:
             self.data["achievements"].append("humidity_hero")
             unlocked.append(self.ACHIEVEMENTS["humidity_hero"])
-        
-        # Wind warrior
+
         if getattr(weather, 'wind_speed', 0) > 30 and "wind_warrior" not in self.data["achievements"]:
             self.data["achievements"].append("wind_warrior")
             unlocked.append(self.ACHIEVEMENTS["wind_warrior"])
-        
-        # Streak achievement
+
         if self.data["streak"] >= 7 and "consistent" not in self.data["achievements"]:
             self.data["achievements"].append("consistent")
             unlocked.append(self.ACHIEVEMENTS["consistent"])
-        
+
         self._save_data()
         return unlocked
-    
+
+    def log_creature_sighting(self, name: str):
+        """Record a creature sighting in persistent data."""
+        sightings = self.data.setdefault("creature_sightings", {})
+        sightings[name] = sightings.get(name, 0) + 1
+        self._save_data()
+
+    def get_creature_sightings(self) -> dict:
+        return self.data.get("creature_sightings", {})
+
     def get_random_quip(self) -> str:
-        """Get a random philosophical/deadpan quip."""
-        if self._use_engine:
-            return self.engine.get_quip(meta_chance=0.4)
-        return random.choice(self.QUIPS)
-    
+        return self.engine.get_quip(meta_chance=0.4)
+
     def get_mood(self) -> Mood:
-        """Get current mood from engine."""
         return self.engine.current_mood
-    
+
     def get_callback(self) -> str:
-        """Attempt a memory callback."""
         return self.engine.get_callback()
 
-# 🎨 ASCII ART ASSETS
-# ═══════════════════════════════════════════════════════════════════════════════
-
-# Big temperature digits
-BIG_DIGITS = {
-    '0': ["┌─┐", "│ │", "└─┘"],
-    '1': [" ┐ ", " │ ", " ┴ "],
-    '2': ["┌─┐", "┌─┘", "└─┘"],
-    '3': ["┌─┐", " ─┤", "└─┘"],
-    '4': ["┐ ┐", "└─┤", "  ┘"],
-    '5': ["┌─┐", "└─┐", "└─┘"],
-    '6': ["┌─┐", "├─┐", "└─┘"],
-    '7': ["┌─┐", "  │", "  ┘"],
-    '8': ["┌─┐", "├─┤", "└─┘"],
-    '9': ["┌─┐", "└─┤", "└─┘"],
-    '-': ["   ", "───", "   "],
-    '°': ["┌┐ ", "└┘ ", "   "],
-    ' ': ["   ", "   ", "   "],
-}
-
-# Stormy's faces - wise and contemplative
-# Cute weather mascot - changes expression based on conditions
-WEATHER_MASCOT = {
-    WeatherCondition.CLEAR: [
-        "    \\  |  //    ",
-        "      (◠‿◠)      ",
-        "    //  |  \\    ",
-    ],
-    WeatherCondition.PARTLY_CLOUDY: [
-        "    ~  ◠◠  ~    ",
-        "      (◕‿◕)      ",
-        "       ~~~       ",
-    ],
-    WeatherCondition.CLOUDY: [
-        "     ~~~☁~~~     ",
-        "      (◕ᴗ◕)      ",
-        "       ~~~       ",
-    ],
-    WeatherCondition.FOG: [
-        "    ≋≋≋≋≋≋≋≋    ",
-        "      (◡_◡)      ",
-        "    ≋≋≋≋≋≋≋≋    ",
-    ],
-    WeatherCondition.DRIZZLE: [
-        "       ☁        ",
-        "      (◕‿◕)      ",
-        "      ⋮ ⋮ ⋮      ",
-    ],
-    WeatherCondition.RAIN: [
-        "      ☁☁☁       ",
-        "      (◕_◕)      ",
-        "      ╏╏╏╏╏      ",
-    ],
-    WeatherCondition.HEAVY_RAIN: [
-        "     ☁☁☁☁☁      ",
-        "      (◕︵◕)      ",
-        "     ╏╏╏╏╏╏╏     ",
-    ],
-    WeatherCondition.FREEZING_RAIN: [
-        "      ☁❄☁       ",
-        "      (◕﹏◕)      ",
-        "      ╏*╏*╏      ",
-    ],
-    WeatherCondition.SNOW: [
-        "     ❄  ❄  ❄     ",
-        "      (◕ω◕)      ",
-        "      * * *      ",
-    ],
-    WeatherCondition.HEAVY_SNOW: [
-        "    ❄❄❄❄❄❄❄    ",
-        "      (◕◡◕)      ",
-        "     *******     ",
-    ],
-    WeatherCondition.THUNDERSTORM: [
-        "     ⚡☁☁⚡      ",
-        "      (◉_◉)      ",
-        "       ⚡⚡       ",
-    ],
-    WeatherCondition.UNKNOWN: [
-        "       ~?~       ",
-        "      (◕_◕)      ",
-        "       ~~~       ",
-    ],
-}
-
-# Legacy faces for random variety
-STORMY_FACES = {
-    "happy": [
-        "      (◠‿◠)      ",
-    ],
-}
-
-# Weather scenes
-WEATHER_SCENES = {
-    WeatherCondition.CLEAR: [
-        "        \\   |   /        ",
-        "          .-'-.          ",
-        "      ─  (     )  ─      ",
-        "          `-.-'          ",
-        "        /   |   \\        ",
-        "                         ",
-    ],
-    WeatherCondition.RAIN: [
-        "        ___               ",
-        "      .(   ).             ",
-        "     (___(____)           ",
-        "      ' ' ' ' '           ",
-        "     ' ' ' ' ' '          ",
-        "      ' ' ' ' '           ",
-    ],
-    WeatherCondition.HEAVY_RAIN: [
-        "        ___               ",
-        "      .(   ).             ",
-        "     (___(____)           ",
-        "     | | | | | |          ",
-        "     | | | | | | |        ",
-        "     | | | | | |          ",
-    ],
-    WeatherCondition.THUNDERSTORM: [
-        "        ___               ",
-        "      .(   ).             ",
-        "     (___(____)           ",
-        "      /  | | \\           ",
-        "        / \\              ",
-        "       /   \\             ",
-    ],
-    WeatherCondition.SNOW: [
-        "        ___               ",
-        "      .(   ).             ",
-        "     (___(____)           ",
-        "      * * * * *           ",
-        "     * * * * * *          ",
-        "      * * * * *           ",
-    ],
-    WeatherCondition.FOG: [
-        "  ≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋         ",
-        " ░░▒░░░▒░░░░▒░░░░         ",
-        "  ≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋         ",
-        " ░░░░▒░░░░▒░░░▒░░         ",
-        "  ≋≋≋≋≋≋≋≋≋≋≋≋≋≋≋         ",
-        " ░▒░░░░░▒░░░░▒░░░         ",
-    ],
-    WeatherCondition.PARTLY_CLOUDY: [
-        "     \\  |  /    ___       ",
-        "       .-'    .(   ).     ",
-        "    ─ (    ) (___(____)   ",
-        "       `-'               ",
-        "     /  |  \\              ",
-        "                          ",
-    ],
-    WeatherCondition.PARTLY_CLOUDY: [
-        "     \\  |  /    ___       ",
-        "       .-'    .(   ).     ",
-        "    ─ (    ) (___(____)   ",
-        "       `-'               ",
-        "     /  |  \\              ",
-        "                          ",
-    ],
-    WeatherCondition.CLOUDY: [
-        "      ☁     ☁             ",
-        "        ___               ",
-        "      .(   ).    ☁        ",
-        "     (___(____)           ",
-        "   ☁          ☁           ",
-        "      ☁    ☁              ",
-    ],
-}
-
-# Fill in missing conditions
-for cond in WeatherCondition:
-    if cond not in WEATHER_SCENES:
-        WEATHER_SCENES[cond] = WEATHER_SCENES.get(WeatherCondition.CLOUDY)
-
-
-
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# 🌦️ DASHBOARD CLASS  
+# DASHBOARD CLASS
 # ═══════════════════════════════════════════════════════════════════════════════
 
 class WeatherDashboard:
@@ -1228,7 +614,7 @@ class WeatherDashboard:
         self.comment_timer = 0
         self.quip_mode = False
         
-        # 🧠 ADVANCED PHYSICS SYSTEMS - "The brain behind the beauty"
+        # ADVANCED PHYSICS SYSTEMS - "The brain behind the beauty"
         # Initialize turbulence field for realistic wind patterns
         self.turbulence = TurbulenceField()
         
@@ -1243,7 +629,7 @@ class WeatherDashboard:
         self.cloud_time = 0
         
         # ═══════════════════════════════════════════════════════════════════
-        # 🌡️ ATMOSPHERIC MODEL (engine.physics.atmosphere)
+        # ATMOSPHERIC MODEL (engine.physics.atmosphere)
         # Real barometric formula: P(h) = P₀ × exp(-Mgh/RT)
         # ═══════════════════════════════════════════════════════════════════
         cloud_cover = {
@@ -1276,7 +662,7 @@ class WeatherDashboard:
             self.feels_like_c = self.weather.temperature_c
         
         # ═══════════════════════════════════════════════════════════════════
-        # ⚛️ ENGINE PARTICLE SYSTEM (engine.physics.particles)
+        # ENGINE PARTICLE SYSTEM (engine.physics.particles)
         # Full physics: Vector2, forces, Semi-implicit Euler integration
         # ═══════════════════════════════════════════════════════════════════
         self.engine_physics_config = PhysicsConfig(
@@ -1325,7 +711,7 @@ class WeatherDashboard:
         )
         
         # ═══════════════════════════════════════════════════════════════════
-        # 🆕 ENHANCED FEATURES INITIALIZATION
+        # ENHANCED FEATURES INITIALIZATION
         # ═══════════════════════════════════════════════════════════════════
         
         # Dashboard state for UI toggles
@@ -1369,6 +755,17 @@ class WeatherDashboard:
         else:
             self.achievement_manager = None
         
+        # Weather history database + sparklines
+        try:
+            from lib.weather_extended import WeatherDatabase
+            from lib.sparkline import sparkline_with_range
+            self.weather_db = WeatherDatabase()
+            self.weather_db.log_weather(weather, self.env_data)
+            self._sparkline_renderer = sparkline_with_range
+        except Exception:
+            self.weather_db = None
+            self._sparkline_renderer = None
+
         # UI Panels
         if PANELS_AVAILABLE:
             self.forecast_panel = ForecastPanel(screen, self.use_metric)
@@ -1516,6 +913,10 @@ class WeatherDashboard:
             return None
         
         
+        # B to show bestiary
+        if key in (ord('b'), ord('B')):
+            return 'bestiary'
+
         # Space to toggle quips
         if key == ord(" "):
             self.quip_mode = not self.quip_mode
@@ -1537,6 +938,7 @@ class WeatherDashboard:
             "  R       - Refresh weather data",
             "  S/L     - Search new location",
             "  A       - View achievements",
+            "  B       - Creature bestiary",
             "  F       - Toggle forecast panel",
             "  U       - Toggle metric/imperial",
             "  ?       - Show/hide this help",
@@ -1647,9 +1049,55 @@ class WeatherDashboard:
             self.particle_colour = Theme.MUTED
             self.spawn_rate = 1
 
+    def transition_to(self, new_weather: WeatherData):
+        """Crossfade to new weather: decay old particles, ramp in new ones."""
+        self._transition_frames = 0
+        self._transition_total = 60  # ~2 seconds at 30fps
+        self._old_spawn_rate = self.spawn_rate
+        self._old_particle_chars = self.particle_chars
+        self._old_particle_colour = self.particle_colour
+
+        # Update core weather state
+        self.weather = new_weather
+        self.current_comment = self.stormy.get_weather_comment(new_weather)
+        self.greeting = self.stormy.get_greeting()
+        self.new_achievements = self.stormy.check_achievements(new_weather)
+        if self.new_achievements:
+            self.achievement_display_timer = 120
+
+        # Configure new particle settings (saved for ramp-in)
+        self._setup_animation()
+        self._new_spawn_rate = self.spawn_rate
+        self.spawn_rate = 0  # Start at zero, ramp up
+
+        # Log to history db
+        if self.weather_db:
+            try:
+                self.weather_db.log_weather(new_weather, self.env_data)
+            except Exception:
+                pass
+
+        # Re-fetch extended data
+        self._extended_data_fetched = False
+
+    def _update_transition(self):
+        """Handle crossfade interpolation during weather transitions."""
+        if not hasattr(self, '_transition_frames'):
+            return
+        self._transition_frames += 1
+        t = self._transition_frames / self._transition_total
+        if t >= 1.0:
+            self.spawn_rate = self._new_spawn_rate
+            del self._transition_frames
+            return
+        # Ease-in: new particles ramp up using smoothstep
+        smooth = t * t * (3 - 2 * t)
+        self.spawn_rate = int(self._new_spawn_rate * smooth)
+
     def update(self):
         """Update animation state with advanced physics."""
         self.frame += 1
+        self._update_transition()
         
         # Lazy fetch extended data on first update
         if not self._extended_data_fetched:
@@ -1657,7 +1105,7 @@ class WeatherDashboard:
             import threading
             threading.Thread(target=self._fetch_extended_data, daemon=True).start()
         # ═══════════════════════════════════════════════════════════════════
-        # 🧠 UPDATE ADVANCED PHYSICS SYSTEMS
+        # UPDATE ADVANCED PHYSICS SYSTEMS
         # ═══════════════════════════════════════════════════════════════════
         self.turbulence.update()
         self.wind_gusts.update()
@@ -1667,7 +1115,7 @@ class WeatherDashboard:
         wind_x, wind_y = self.wind_gusts.get_wind()
         
         # ═══════════════════════════════════════════════════════════════════
-        # ⚛️ UPDATE ENGINE PARTICLE SYSTEM (engine.physics.particles)
+        # UPDATE ENGINE PARTICLE SYSTEM (engine.physics.particles)
         # ═══════════════════════════════════════════════════════════════════
         self.frame_budget.begin_frame()
         self.engine_particle_system.update(1.0)  # Uses Vector2, forces, integrators
@@ -1796,7 +1244,7 @@ class WeatherDashboard:
         ]
         
         # ═══════════════════════════════════════════════════════════════════
-        # 🌩️ ADVANCED LIGHTNING SYSTEM (Branching fractals)
+        # ADVANCED LIGHTNING SYSTEM (Branching fractals)
         # ═══════════════════════════════════════════════════════════════════
         if self.weather.condition == WeatherCondition.THUNDERSTORM:
             if self.lightning_timer > 0:
@@ -1817,13 +1265,16 @@ class WeatherDashboard:
             else:
                 self.lightning_active = len(self.lightning_bolts) > 0
         
-        # Easter egg creatures - try to spawn and update
+        # Easter egg creatures - try to spawn, track sightings, update
         hour = datetime.now().hour
-        self.easter_eggs.try_spawn(self.weather.condition, hour)
+        was_active = self.easter_eggs.is_active
+        spawned = self.easter_eggs.try_spawn(self.weather.condition, hour)
+        if spawned and self.easter_eggs.current_creature_name:
+            self.stormy.log_creature_sighting(self.easter_eggs.current_creature_name)
         self.easter_eggs.update()
         
         # ═══════════════════════════════════════════════════════════════════
-        # 🆕 UPDATE ENHANCED FEATURES
+        # UPDATE ENHANCED FEATURES
         # ═══════════════════════════════════════════════════════════════════
         
         # Update special effects
@@ -2016,6 +1467,29 @@ class WeatherDashboard:
                     self.screen.print_at(stat[:sw-3], 1, y, colour=Theme.SNOW)
                     y += 1
         
+        # Sparkline trends (24h history)
+        if self.weather_db and self._sparkline_renderer and y < self.height - 8:
+            try:
+                trend = self.weather_db.get_trend_data(hours=24)
+                spark_width = sw - 16  # leave room for label + range
+                if trend["temp"] and len(trend["temp"]) >= 2:
+                    y += 1
+                    self.screen.print_at("+" + "-" * (sw - 2) + "+", 0, y, colour=Theme.FROST)
+                    y += 1
+                    spark = self._sparkline_renderer(trend["temp"], "Temp", width=spark_width)
+                    self.screen.print_at(f"  {spark}"[:sw-2], 1, y, colour=Theme.SUN)
+                    y += 1
+                if trend["humidity"] and len(trend["humidity"]) >= 2:
+                    spark = self._sparkline_renderer(trend["humidity"], "Hum%", width=spark_width)
+                    self.screen.print_at(f"  {spark}"[:sw-2], 1, y, colour=Theme.FROST)
+                    y += 1
+                if trend["wind"] and len(trend["wind"]) >= 2:
+                    spark = self._sparkline_renderer(trend["wind"], "Wind", width=spark_width)
+                    self.screen.print_at(f"  {spark}"[:sw-2], 1, y, colour=Theme.SNOW)
+                    y += 1
+            except Exception:
+                pass
+
         # Time and achievements at bottom
         self.screen.print_at("+" + "-" * (sw - 2) + "+", 0, self.height - 4, colour=Theme.FROST)
         
@@ -2031,12 +1505,12 @@ class WeatherDashboard:
         ax = self.animation_start_x
         aw = self.animation_width
         
-        title = "⚡ LIVE" if self.weather.condition == WeatherCondition.THUNDERSTORM else "◉ LIVE"
+        title = "󱐋 LIVE" if self.weather.condition == WeatherCondition.THUNDERSTORM else "◉ LIVE"
         
         self._draw_box(ax, 0, aw, self.height - 1, title)
         
         # ═══════════════════════════════════════════════════════════════════
-        # 🌫️ PERLIN NOISE CLOUD LAYER
+        # PERLIN NOISE CLOUD LAYER
         # ═══════════════════════════════════════════════════════════════════
         if self.weather.condition in (
             WeatherCondition.RAIN, WeatherCondition.HEAVY_RAIN,
@@ -2081,7 +1555,7 @@ class WeatherDashboard:
                         self.screen.print_at(char, x, y, colour=colour)
         
         # ═══════════════════════════════════════════════════════════════════
-        # 🌧️ PHYSICS-BASED PARTICLES (with trails)
+        # PHYSICS-BASED PARTICLES (with trails)
         # ═══════════════════════════════════════════════════════════════════
         for p in self.physics_particles:
             try:
@@ -2109,7 +1583,7 @@ class WeatherDashboard:
                 pass
         
         # ═══════════════════════════════════════════════════════════════════
-        # ⚡ BRANCHING LIGHTNING (Fractal pathfinding)
+        # BRANCHING LIGHTNING (Fractal pathfinding)
         # ═══════════════════════════════════════════════════════════════════
         for bolt in self.lightning_bolts:
             bolt.draw(self.screen, ax)
@@ -2202,166 +1676,9 @@ class WeatherDashboard:
                             colour=Theme.MUTED, bg=Theme.FROST)
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# 🏆 ACHIEVEMENTS SCREEN
-# ═══════════════════════════════════════════════════════════════════════════════
-
-def draw_achievements_screen(screen: Screen, stormy: StormyPersonality):
-    """Draw the achievements screen."""
-    screen.clear()
-    
-    w, h = screen.width, screen.height
-    
-    # Title
-    title = "STORMY'S HALL OF FAME"
-    screen.print_at(title, (w - len(title)) // 2, 1, colour=Theme.SUN)
-    
-    subtitle = f"You've unlocked {len(stormy.data['achievements'])} of {len(stormy.ACHIEVEMENTS)} achievements!"
-    screen.print_at(subtitle, (w - len(subtitle)) // 2, 3, colour=Theme.FROST)
-    
-    y = 5
-    col_width = w // 2 - 2
-    col = 0
-    
-    for key, (icon, name) in stormy.ACHIEVEMENTS.items():
-        unlocked = key in stormy.data["achievements"]
-        
-        if unlocked:
-            text = f"  {icon} {name}"
-            colour = Theme.SUN
-        else:
-            text = f"  [?] ???"
-            colour = Theme.MUTED
-        
-        x = 2 + col * col_width
-        screen.print_at(text[:col_width-2], x, y, colour=colour)
-        
-        col += 1
-        if col >= 2:
-            col = 0
-            y += 2
-        
-        if y >= h - 4:
-            break
-    
-    # Stats
-    stats = f"Total checks: {stormy.data['check_count']} | Current streak: {stormy.data['streak']} days"
-    screen.print_at(stats, (w - len(stats)) // 2, h - 3, colour=Theme.SNOW)
-    
-    footer = "Press any key to return..."
-    screen.print_at(footer, (w - len(footer)) // 2, h - 1, colour=Theme.FROST)
-    
-    screen.refresh()
-    screen.wait_for_input(60)
-
-
-def location_search_screen(screen: Screen) -> Optional[WeatherData]:
-    """
-    Interactive location search screen.
-    Type a city name and press Enter to search.
-    
-    Examples:
-        Summerville, SC
-        New York, NY
-        Moscow, Russia
-        San Diego, CA
-        Tokyo, Japan
-    """
-    screen.clear()
-    w, h = screen.width, screen.height
-    
-    # Title
-    title = "🌍 LOCATION SEARCH"
-    screen.print_at(title, (w - len(title)) // 2, 2, colour=Theme.SUN)
-    
-    subtitle = "Type a city name and press Enter"
-    screen.print_at(subtitle, (w - len(subtitle)) // 2, 4, colour=Theme.FROST)
-    
-    # Examples
-    examples = [
-        "Examples:  Summerville, SC  |  New York, NY  |  Moscow, Russia",
-        "           Tokyo, Japan  |  London, UK  |  Paris, France"
-    ]
-    for i, ex in enumerate(examples):
-        screen.print_at(ex, (w - len(ex)) // 2, 6 + i, colour=Theme.MUTED)
-    
-    # Input box
-    box_y = 10
-    box_width = min(60, w - 4)
-    box_x = (w - box_width) // 2
-    
-    # Draw box
-    screen.print_at("┌" + "─" * (box_width - 2) + "┐", box_x, box_y, colour=Theme.FROST)
-    screen.print_at("│" + " " * (box_width - 2) + "│", box_x, box_y + 1, colour=Theme.FROST)
-    screen.print_at("└" + "─" * (box_width - 2) + "┘", box_x, box_y + 2, colour=Theme.FROST)
-    
-    # Instructions
-    instructions = "Enter = Search  |  Esc = Cancel  |  Backspace = Delete"
-    screen.print_at(instructions, (w - len(instructions)) // 2, box_y + 4, colour=Theme.MUTED)
-    
-    screen.refresh()
-    
-    # Input loop
-    query = ""
-    cursor_x = box_x + 2
-    
-    while True:
-        # Clear input area and redraw
-        screen.print_at(" " * (box_width - 4), box_x + 2, box_y + 1)
-        screen.print_at(query[-box_width+6:], box_x + 2, box_y + 1, colour=Theme.SUN)
-        
-        # Cursor
-        cursor_pos = box_x + 2 + min(len(query), box_width - 6)
-        screen.print_at("▌", cursor_pos, box_y + 1, colour=Theme.FROST)
-        
-        # Clear status line
-        screen.print_at(" " * (w - 4), 2, box_y + 6)
-        screen.refresh()
-        
-        ev = screen.get_key()
-        
-        if ev == Screen.KEY_ESCAPE or ev == ord('q'):
-            return None
-        
-        if ev in (10, 13):  # Enter key
-            if query.strip():
-                # Show searching message
-                msg = f"Searching for '{query}'..."
-                screen.print_at(" " * (w - 4), 2, box_y + 6)
-                screen.print_at(msg, (w - len(msg)) // 2, box_y + 6, colour=Theme.FROST)
-                screen.refresh()
-                
-                # Search!
-                weather = search_and_fetch_weather(query.strip())
-                
-                if weather:
-                    success = f"✓ Found: {weather.location} - {weather.temperature_f:.0f}°F, {weather.description}"
-                    screen.print_at(" " * (w - 4), 2, box_y + 6)
-                    screen.print_at(success[:w-4], (w - min(len(success), w-4)) // 2, box_y + 6, colour=Theme.SUN)
-                    screen.refresh()
-                    time.sleep(1.5)
-                    return weather
-                else:
-                    error = f"✗ Location not found: '{query}'"
-                    screen.print_at(" " * (w - 4), 2, box_y + 6)
-                    screen.print_at(error, (w - len(error)) // 2, box_y + 6, colour=Screen.COLOUR_RED)
-                    screen.refresh()
-                    time.sleep(1.5)
-                    query = ""
-        
-        elif ev == Screen.KEY_BACK or ev == 127 or ev == 8:  # Backspace
-            query = query[:-1]
-        
-        elif ev is not None and 32 <= ev < 127:  # Printable characters
-            query += chr(ev)
-        
-        time.sleep(0.033)
-
-
-
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# 🚀 MAIN
+# MAIN
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def dashboard_main(screen: Screen):
@@ -2415,25 +1732,25 @@ def dashboard_main(screen: Screen):
         if result == True:
             return  # Quit
         elif result == 'refresh':
-            weather = get_weather(use_cache=False)
-            if weather:
-                dashboard = WeatherDashboard(screen, weather)
+            new_weather = get_weather(use_cache=False)
+            if new_weather:
+                weather = new_weather
+                dashboard.transition_to(weather)
                 last_fetch = time.time()
                 if dashboard.notifications:
                     dashboard.notifications.add_success("Weather refreshed!")
         elif result == 'search':
-            new_weather = location_search_screen(screen)
+            new_weather = location_search_screen(screen, Theme)
             if new_weather:
                 weather = new_weather
                 dashboard = WeatherDashboard(screen, weather)
                 last_fetch = time.time()
         elif result == 'achievements':
-            draw_achievements_screen(screen, dashboard.stormy)
+            draw_achievements_screen(screen, dashboard.stormy, Theme)
             dashboard.draw()
-        
-        # Help toggle (? key)
-        if ev == ord('?'):
-            dashboard.show_help = not dashboard.show_help
+        elif result == 'bestiary':
+            draw_bestiary_screen(screen, dashboard.stormy, Theme)
+            dashboard.draw()
         
         # F key now handled in handle_input for forecast toggle
         if ev in (ord('f'), ord('F')) and not dashboard.show_forecast:
@@ -2450,7 +1767,7 @@ def dashboard_main(screen: Screen):
             new_weather = get_weather(use_cache=False)
             if new_weather:
                 weather = new_weather
-                dashboard = WeatherDashboard(screen, weather)
+                dashboard.transition_to(weather)
                 last_fetch = time.time()
         
         dashboard.update()

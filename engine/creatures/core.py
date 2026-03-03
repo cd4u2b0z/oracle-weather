@@ -82,7 +82,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "MAGIC",
             "speed": 0.15,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
         {
             "name": "Eldritch Eye",
@@ -93,7 +93,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "DANGER",
             "speed": 0.08,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
     ],
     "fog_day": [
@@ -106,7 +106,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "SNOW",
             "speed": 0.08,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
     ],
     
@@ -122,7 +122,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "DANGER",
             "speed": 0.25,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
         {
             "name": "Storm Wraith",
@@ -132,7 +132,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "FROST",
             "speed": 0.18,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
     ],
     "storm_day": [
@@ -144,7 +144,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "SUN",
             "speed": 0.3,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
     ],
     
@@ -160,7 +160,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "FROST",
             "speed": 0.2,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
         {
             "name": "Will-o-Wisp",
@@ -170,7 +170,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "MAGIC",
             "speed": 0.1,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
     ],
     "rain_day": [
@@ -182,7 +182,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "FROST",
             "speed": 0.15,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
         {
             "name": "Frog Prince",
@@ -192,7 +192,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "NATURE",
             "speed": 0.12,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
     ],
     
@@ -208,7 +208,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "FROST",
             "speed": 0.12,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
         {
             "name": "Wendigo",
@@ -218,7 +218,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "SNOW",
             "speed": 0.1,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
     ],
     "snow_day": [
@@ -230,7 +230,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "SNOW",
             "speed": 0.08,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
         {
             "name": "Snowman",
@@ -240,7 +240,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "SNOW",
             "speed": 0.05,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
     ],
     
@@ -256,7 +256,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "NATURE",
             "speed": 0.2,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
         {
             "name": "Shooting Star",
@@ -266,7 +266,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "SUN",
             "speed": 0.5,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
         {
             "name": "Bat",
@@ -276,7 +276,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "MUTED",
             "speed": 0.25,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
         {
             "name": "Owl",
@@ -286,7 +286,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "MUTED",
             "speed": 0.1,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
         {
             "name": "Firefly",
@@ -296,7 +296,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "SUN",
             "speed": 0.08,
-            "rarity": 0.0006,
+            "rarity": 0.002,
         },
     ],
     
@@ -312,7 +312,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "DANGER",
             "speed": 0.22,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
         {
             "name": "Butterfly",
@@ -322,7 +322,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "MAGIC",
             "speed": 0.15,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
         {
             "name": "Hummingbird",
@@ -332,7 +332,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "NATURE",
             "speed": 0.3,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
         {
             "name": "Bee",
@@ -342,7 +342,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "SUN",
             "speed": 0.18,
-            "rarity": 0.0005,
+            "rarity": 0.0018,
         },
     ],
     
@@ -358,7 +358,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "SNOW",
             "speed": 0.06,
-            "rarity": 0.0004,
+            "rarity": 0.0015,
         },
         {
             "name": "Paper Airplane",
@@ -368,7 +368,7 @@ CREATURES: Dict[str, List[Dict[str, Any]]] = {
             ],
             "colour": "SNOW",
             "speed": 0.25,
-            "rarity": 0.0005,
+            "rarity": 0.0018,
         },
     ],
 }
