@@ -25,3 +25,6 @@ Thumbs.db
 
 # Local config (contains API key)
 config.py
+
+# Project context
+CLAUDE.md
